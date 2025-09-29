@@ -1,7 +1,5 @@
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
-import { useEffect } from "react";
-
 export default function MyMap() {
   const default_center = {
     location: {

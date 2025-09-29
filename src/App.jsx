@@ -25,10 +25,8 @@ function App() {
     dataRecords.map((record) => {
       //create empty object
       const object = {};
-
       //go into fields property
       const fields = record.fields;
-
       //create all the object properties
       object.id = fields.id;
       object.proj_name = fields.project_name;
@@ -40,7 +38,6 @@ function App() {
       object.system_size = fields.system_size_mw;
       object.proj_status = fields.status;
       object.proj_lead = fields.project_lead;
-
       //push object into parsedData variable
       parsedProjects.push(object);
     });
@@ -56,7 +53,6 @@ function App() {
       };
       try {
         const resp = await fetch(url, options);
-        console.log("Response status: ", resp.status);
         if (!resp.ok) {
           const errorText = await resp.text();
           console.log("Error response body:", errorText);
@@ -82,7 +78,7 @@ function App() {
       <h1>Projects Map Tool</h1>
       <MyMap></MyMap>
       <AddProjectModal />
-      <MyAdvancedMarker />
+      <MyAdvancedMarker projects={projects} />
       <MyInfoWindow />
       <Project />
     </>
