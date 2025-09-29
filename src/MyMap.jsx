@@ -1,15 +1,16 @@
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
+import { useEffect } from "react";
+
 export default function MyMap() {
-  
   const default_center = {
     location: {
       lat: 37.09024,
-      lng: -95.712891
+      lng: -95.712891,
     },
     zoom: 3.7,
   };
-  
+
   return (
     <div style={{ height: "75vh", width: "75vw" }}>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLEMAPS_API_KEY}>
