@@ -77,8 +77,8 @@ function App() {
     <>
       <h1>Projects Map Tool</h1>
       <MyMap></MyMap>
+      <MyAdvancedMarker />
       <AddProjectModal />
-      <MyAdvancedMarker projects={projects} />
       <MyInfoWindow />
       <Project />
     </>
