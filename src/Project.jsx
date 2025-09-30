@@ -1,7 +1,7 @@
-export default function Project() {
+export default function Project({project}) {
   return (
     <div>
-      <h1>This is the Project component</h1>
+      <p>{project.proj_name}</p>
     </div>
   );
 }

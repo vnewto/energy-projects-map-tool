@@ -3,37 +3,37 @@ import "./App.css";
 
 import MyMap from "./MyMap.jsx";
 import AddProjectModal from "./AddProjectModal.jsx";
-import MyAdvancedMarker from "./MyAdvancedMarker.jsx";
-import MyInfoWindow from "./MyInfoWindow.jsx";
 import Project from "./Project.jsx";
 
 //function to parse data received from Airtable and turn it into an array of objects
-  function parseData(data) {
-    //create an empty array to store the objects
-    const parsedProjects = [];
-    //map over data.records
-    const dataRecords = data.records;
-    dataRecords.map((record) => {
-      //create empty object
-      const object = {};
-      //go into fields property
-      const fields = record.fields;
-      //create all the object properties
-      object.id = fields.id;
-      object.proj_name = fields.project_name;
-      object.location = {
-        lat: fields.lat,
-        lng: fields.lng,
-      };
-      object.utility = fields.utility;
-      object.system_size = fields.system_size_mw;
-      object.proj_status = fields.status;
-      object.proj_lead = fields.project_lead;
-      //push object into parsedData variable
-      parsedProjects.push(object);
-    });
-    return parsedProjects;
-  }
+function parseData(data) {
+  //create an empty array to store the objects
+  const parsedProjects = [];
+  //map over data.records
+  const dataRecords = data.records;
+  dataRecords.map((record) => {
+    //create empty object
+    const object = {};
+    //go into fields property
+    const fields = record.fields;
+    //create all the object properties
+    object.id = fields.id;
+    object.proj_name = fields.project_name;
+    object.location = {
+      lat: fields.lat,
+      lng: fields.lng,
+    };
+    object.utility = fields.utility;
+    object.system_size = fields.system_size_mw;
+    object.proj_status = fields.status;
+    object.proj_lead = fields.project_lead;
+    //push object into parsedData variable
+    parsedProjects.push(object);
+  });
+  return parsedProjects;
+}
+
+const test_project = {};
 
 function App() {
   // url and token for fetch request from airtable
@@ -83,7 +83,15 @@ function App() {
         setSelectedProject={setSelectedProject}
       ></MyMap>
       <AddProjectModal />
-      <Project />
+      <div>
+        <ul>
+          {projects.map((project) => (
+            <li key={project.id}>
+              <Project project={project}></Project>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
