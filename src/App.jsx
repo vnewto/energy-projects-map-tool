@@ -76,9 +76,8 @@ function App() {
   return (
     <>
       <h1>Projects Map Tool</h1>
-      <MyMap></MyMap>
+      <MyMap projects={projects}></MyMap>
       <AddProjectModal />
-      <MyAdvancedMarker projects={projects} />
       <MyInfoWindow />
       <Project />
     </>

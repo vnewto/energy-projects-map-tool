@@ -1,6 +1,9 @@
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import MyAdvancedMarker from "./MyAdvancedMarker";
 
-export default function MyMap() {
+export default function MyMap({ projects }) {
+  const test_position = { lat: 37.09024, lng: -95.712891 };
+
   const default_center = {
     location: {
       lat: 37.09024,
@@ -18,7 +21,9 @@ export default function MyMap() {
           defaultCenter={default_center.location}
           reuseMaps={true}
           mapId={import.meta.env.VITE_GOOGLEMAPS_MAP_ID}
-        ></Map>
+        >
+          <MyAdvancedMarker position={test_position}></MyAdvancedMarker>
+        </Map>
       </APIProvider>
     </div>
   );
