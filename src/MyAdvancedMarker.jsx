@@ -4,16 +4,13 @@ import { AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
 
 export default function MyAdvancedMarker({
   position,
-  selectedProject,
-  setSelectedProject,
-  handleClickMarker,
+  handleClickProject,
   project,
 }) {
   return (
     <AdvancedMarker
       position={position}
-      onClick={() => handleClickMarker(project)}
-      project={project}
+      onClick={() => handleClickProject(project)}
     >
       <Pin
         background={"#0f9d58"}

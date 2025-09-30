@@ -1,6 +1,6 @@
-export default function Project({project}) {
+export default function Project({project, handleClickProject}) {
   return (
-    <div>
+    <div onClick={() => handleClickProject(project)}>
       <p>{project.proj_name}</p>
     </div>
   );

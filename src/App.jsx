@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 
 import MyMap from "./MyMap.jsx";
@@ -57,8 +57,8 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  //fetch data from airtable
   useEffect(() => {
+    //fetch projects list from airtable
     const fetchMapData = async () => {
       const options = {
         method: "GET",
@@ -86,6 +86,12 @@ function App() {
     fetchMapData();
   }, [token, url]);
 
+  //function to set the selected project when it's clicked on either as an AdvancedMarker or as a Project in the Projects list
+  const handleClickProject = useCallback(
+    (project) => setSelectedProject(project),
+    [setSelectedProject]
+  );
+
   return (
     <>
       <h1>Projects Map Tool</h1>
@@ -93,13 +99,17 @@ function App() {
         projects={projects}
         selectedProject={selectedProject}
         setSelectedProject={setSelectedProject}
+        handleClickProject={handleClickProject}
       ></MyMap>
       <AddProjectModal />
       <div>
         <ul>
           {projects.map((project) => (
             <li key={project.id}>
-              <Project project={project}></Project>
+              <Project
+                project={project}
+                handleClickProject={handleClickProject}
+              ></Project>
             </li>
           ))}
         </ul>
