@@ -7,9 +7,14 @@ export default function MyAdvancedMarker({
   selectedProject,
   setSelectedProject,
   handleClickMarker,
+  project,
 }) {
   return (
-    <AdvancedMarker position={position} onClick={handleClickMarker}>
+    <AdvancedMarker
+      position={position}
+      onClick={() => handleClickMarker(project)}
+      project={project}
+    >
       <Pin
         background={"#0f9d58"}
         borderColor={"#006425"}

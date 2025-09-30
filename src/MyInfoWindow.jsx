@@ -1,7 +1,25 @@
-export default function MyInfoWindow({selectedProject}) {
+import { InfoWindow } from "@vis.gl/react-google-maps";
+
+export default function MyInfoWindow({ project }) {
   return (
-    <div>
-      <h1>This is the MyInfoWindow component</h1>
-    </div>
+    <InfoWindow position={project.location}>
+      <h1>{project.proj_name}</h1>
+      <p>
+        <span>System Size: </span>
+        {project.system_size}
+      </p>
+      <p>
+        <span>Utility: </span>
+        {project.utility}
+      </p>
+      <p>
+        <span>Status: </span>
+        {project.proj_status}
+      </p>
+      <p>
+        <span>Project Lead: </span>
+        {project.proj_lead}
+      </p>
+    </InfoWindow>
   );
 }

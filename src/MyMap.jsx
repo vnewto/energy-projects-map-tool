@@ -1,6 +1,7 @@
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import MyAdvancedMarker from "./MyAdvancedMarker";
-import { useCallback } from "react";
+import MyInfoWindow from "./MyInfoWindow";
+import {useCallback} from 'react';
 
 export default function MyMap({
   projects,
@@ -15,12 +16,10 @@ export default function MyMap({
     zoom: 3.7,
   };
 
-  function handleClickMarker(projectID) {
-    console.log("a marker has been clicked for project ", projectID);
-    setSelectedProject(projectID);
-  }
-
-  // const handleClickMarker = useCallback((projectID) => setSelectedProject(projectID), [setSelectedProject])
+  const handleClickMarker = useCallback(
+    (project) => setSelectedProject(project),
+    [setSelectedProject]
+  );
 
   return (
     <div style={{ height: "75vh", width: "75vw" }}>
@@ -37,11 +36,15 @@ export default function MyMap({
               <MyAdvancedMarker
                 key={project.id}
                 position={project.location}
+                project={project}
                 handleClickMarker={handleClickMarker}
               ></MyAdvancedMarker>
             );
           })}
           ;
+          {selectedProject && (
+            <MyInfoWindow project={selectedProject}></MyInfoWindow>
+          )}
         </Map>
       </APIProvider>
     </div>

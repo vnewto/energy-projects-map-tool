@@ -4,6 +4,7 @@ import "./App.css";
 import MyMap from "./MyMap.jsx";
 import AddProjectModal from "./AddProjectModal.jsx";
 import Project from "./Project.jsx";
+import MyInfoWindow from "./MyInfoWindow.jsx";
 
 //function to parse data received from Airtable and turn it into an array of objects
 function parseData(data) {
@@ -33,7 +34,18 @@ function parseData(data) {
   return parsedProjects;
 }
 
-const test_project = {};
+// const test_project = {
+//   id: 6,
+//   location: {
+//     lat: 39.9526,
+//     lng: -75.1652,
+//   },
+//   proj_lead: "Zara",
+//   proj_name: " Cedar Creek",
+//   proj_status: "Development",
+//   system_size: 136.6,
+//   utility: "Apex Energy",
+// };
 
 function App() {
   // url and token for fetch request from airtable
