@@ -7,16 +7,7 @@ import MyAdvancedMarker from "./MyAdvancedMarker.jsx";
 import MyInfoWindow from "./MyInfoWindow.jsx";
 import Project from "./Project.jsx";
 
-function App() {
-  // url and token for fetch request from airtable
-  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
-    import.meta.env.VITE_TABLE_NAME
-  }`;
-  const token = `Bearer ${import.meta.env.VITE_PAT}`;
-
-  const [projects, setProjects] = useState([]);
-
-  //function to parse data received from Airtable and turn it into an array of objects
+//function to parse data received from Airtable and turn it into an array of objects
   function parseData(data) {
     //create an empty array to store the objects
     const parsedProjects = [];
@@ -43,6 +34,16 @@ function App() {
     });
     return parsedProjects;
   }
+
+function App() {
+  // url and token for fetch request from airtable
+  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+    import.meta.env.VITE_TABLE_NAME
+  }`;
+  const token = `Bearer ${import.meta.env.VITE_PAT}`;
+
+  const [projects, setProjects] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   //fetch data from airtable
   useEffect(() => {
@@ -76,9 +77,12 @@ function App() {
   return (
     <>
       <h1>Projects Map Tool</h1>
-      <MyMap projects={projects}></MyMap>
+      <MyMap
+        projects={projects}
+        selectedProject={selectedProject}
+        setSelectedProject={setSelectedProject}
+      ></MyMap>
       <AddProjectModal />
-      <MyInfoWindow />
       <Project />
     </>
   );

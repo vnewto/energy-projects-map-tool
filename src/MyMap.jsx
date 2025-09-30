@@ -1,7 +1,11 @@
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import MyAdvancedMarker from "./MyAdvancedMarker";
 
-export default function MyMap({ projects }) {
+export default function MyMap({
+  projects,
+  selectedProject,
+  setSelectedProject,
+}) {
   const default_center = {
     location: {
       lat: 37.09024,
@@ -9,6 +13,10 @@ export default function MyMap({ projects }) {
     },
     zoom: 3.7,
   };
+
+  function handleClickMarker() {
+    console.log("a marker has been clicked");
+  }
 
   return (
     <div style={{ height: "75vh", width: "75vw" }}>
@@ -22,11 +30,11 @@ export default function MyMap({ projects }) {
         >
           {projects.map((project) => {
             return (
-              <div key={project.id}>
-                <MyAdvancedMarker
-                  position={project.location}
-                ></MyAdvancedMarker>
-              </div>
+              <MyAdvancedMarker
+                key={project.id}
+                position={project.location}
+                handleClickMarker={handleClickMarker}
+              ></MyAdvancedMarker>
             );
           })}
           ;
