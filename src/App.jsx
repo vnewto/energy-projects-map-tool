@@ -94,17 +94,24 @@ function App() {
     [setSelectedProject]
   );
 
+  //function that changes projectModal state to false if true, or true if false
+  const toggleModal = () => {
+    setProjectModal(!projectModal);
+  };
+
   return (
     <>
       {projectModal && (
         <AddProjectModal
           projectModal={projectModal}
           setProjectModal={setProjectModal}
+          toggleModal={toggleModal}
         />
       )}
       <div>
         <h1>Projects Map Tool</h1>
         <FilterOptions></FilterOptions>
+        <button onClick={toggleModal}>Add New Project</button>
         <MyMap
           projects={projects}
           selectedProject={selectedProject}
