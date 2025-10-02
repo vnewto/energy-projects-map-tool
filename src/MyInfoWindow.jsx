@@ -6,7 +6,7 @@ export default function MyInfoWindow({ project }) {
       <h1>{project.proj_name}</h1>
       <p>
         <span>System Size: </span>
-        {project.system_size}
+        {project.system_size} MW
       </p>
       <p>
         <span>Utility: </span>

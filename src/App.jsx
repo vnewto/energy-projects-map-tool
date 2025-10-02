@@ -5,6 +5,7 @@ import MyMap from "./MyMap.jsx";
 import AddProjectModal from "./AddProjectModal.jsx";
 import Project from "./Project.jsx";
 import MyInfoWindow from "./MyInfoWindow.jsx";
+import FilterOptions from "./FilterOptions.jsx";
 
 //function to parse data received from Airtable and turn it into an array of objects
 function parseData(data) {
@@ -95,13 +96,14 @@ function App() {
   return (
     <>
       <h1>Projects Map Tool</h1>
+      <FilterOptions></FilterOptions>
+      <AddProjectModal />
       <MyMap
         projects={projects}
         selectedProject={selectedProject}
         setSelectedProject={setSelectedProject}
         handleClickProject={handleClickProject}
       ></MyMap>
-      <AddProjectModal />
       <div>
         <ul>
           {projects.map((project) => (
