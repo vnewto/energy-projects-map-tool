@@ -1,0 +1,25 @@
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(49, 49, 49, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  border: red solid 2px;
+  background: white;
+  padding: 2em;
+  max-width: 500px;
+  min-width: 300px;
+  position: relative;
+}
