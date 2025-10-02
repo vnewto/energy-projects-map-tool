@@ -99,6 +99,55 @@ function App() {
     setProjectModal(!projectModal);
   };
 
+  //function for adding a new project to the list
+  async function addNewProject(newProject) {
+    const payload = {
+      records: [
+        {
+          fields: {
+            id: newProject.id,
+            location: {
+              lat: newProject.location.lat,
+              lng: newProject.location.lng,
+            },
+            proj_lead: newProject.proj_lead,
+            proj_name: newProject.proj_name,
+            proj_status: newProject.proj_status,
+            system_size: newProject.system_size,
+            utility: newProject.utility,
+          },
+        },
+      ],
+    };
+    //define options for fetch request
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    try {
+      const resp = await fetch(encodeUrl(), options);
+      // show error message if response not ok
+      if (!resp.ok) {
+        throw new Error(resp.message);
+      }
+      // if response is ok, convert promise from json; destructure records
+      const { records } = await resp.json();
+      const savedProject = {
+        ...records[0],
+        ...records[0].fields,
+      };
+      //update projects with the new project added on
+      setProjects([...projects, savedProject]);
+      setSelectedProject(savedProject);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <>
       {projectModal && (
@@ -106,6 +155,7 @@ function App() {
           projectModal={projectModal}
           setProjectModal={setProjectModal}
           toggleModal={toggleModal}
+          addNewProject={addNewProject}
         />
       )}
       <div>
