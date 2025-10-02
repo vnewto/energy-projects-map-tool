@@ -57,6 +57,7 @@ function App() {
 
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [projectModal, setProjectModal] = useState(false);
 
   useEffect(() => {
     //fetch projects list from airtable
@@ -93,28 +94,42 @@ function App() {
     [setSelectedProject]
   );
 
+  //function that changes projectModal state to false if true, or true if false
+  const toggleModal = () => {
+    setProjectModal(!projectModal);
+  };
+
   return (
     <>
-      <h1>Projects Map Tool</h1>
-      <FilterOptions></FilterOptions>
-      <AddProjectModal />
-      <MyMap
-        projects={projects}
-        selectedProject={selectedProject}
-        setSelectedProject={setSelectedProject}
-        handleClickProject={handleClickProject}
-      ></MyMap>
+      {projectModal && (
+        <AddProjectModal
+          projectModal={projectModal}
+          setProjectModal={setProjectModal}
+          toggleModal={toggleModal}
+        />
+      )}
       <div>
-        <ul>
-          {projects.map((project) => (
-            <li key={project.id}>
-              <Project
-                project={project}
-                handleClickProject={handleClickProject}
-              ></Project>
-            </li>
-          ))}
-        </ul>
+        <h1>Projects Map Tool</h1>
+        <FilterOptions></FilterOptions>
+        <button onClick={toggleModal}>Add New Project</button>
+        <MyMap
+          projects={projects}
+          selectedProject={selectedProject}
+          setSelectedProject={setSelectedProject}
+          handleClickProject={handleClickProject}
+        ></MyMap>
+        <div>
+          <ul>
+            {projects.map((project) => (
+              <li key={project.id}>
+                <Project
+                  project={project}
+                  handleClickProject={handleClickProject}
+                ></Project>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );
