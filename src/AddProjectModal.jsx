@@ -1,23 +1,35 @@
+import { useState } from "react";
 import styles from "./AddProjectModal.module.css";
 
-export default function AddProjectModal({ toggleModal }) {
-  const newProject = {
-    id: Date.now(),
-    location: {
-      lat: 0,
-      lng: 0,
-    },
-    proj_lead: "",
-    proj_name: "",
-    proj_status: "",
-    system_size: 0,
-    utility: "",
-  };
+export default function AddProjectModal({ toggleModal, addNewProject }) {
+  //create state variable for each new project key/value pair
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const [lead, setLead] = useState("");
+  const [name, setName] = useState("");
+  const [status, setStatus] = useState("");
+  const [size, setSize] = useState("");
+  const [utility, setUtility] = useState("");
 
   const handleSubmit = (e) => {
     //prevent page from refreshing
     e.preventDefault();
+
+    const newProject = {
+      id: Date.now(),
+      location: {
+        lat: Number(lat),
+        lng: Number(lng),
+      },
+      proj_lead: lead,
+      proj_name: name,
+      proj_status: status,
+      system_size: Number(size),
+      utility: utility,
+    };
+
     console.log("Form submitted");
+    addNewProject(newProject);
     toggleModal();
   };
 
@@ -34,7 +46,8 @@ export default function AddProjectModal({ toggleModal }) {
                 name="proj_name"
                 id="proj_name"
                 required
-                // value={newProject.proj_name}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               ></input>
               <br />
               <label htmlFor="lat">Latitude</label>
@@ -43,7 +56,10 @@ export default function AddProjectModal({ toggleModal }) {
                 name="lat"
                 id="lat"
                 required
-                // value={newProject.lat}
+                inputMode="decimal"
+                pattern="[0-9]*[.,]?[0-9]*"
+                value={lat}
+                onChange={(e) => setLat(e.target.value)}
               ></input>
               <br />
               <label htmlFor="lng">Longitude</label>
@@ -52,7 +68,10 @@ export default function AddProjectModal({ toggleModal }) {
                 name="lng"
                 id="lng"
                 required
-                // value={newProject.lng}
+                inputMode="decimal"
+                pattern="[0-9]*[.,]?[0-9]*"
+                value={lng}
+                onChange={(e) => setLng(e.target.value)}
               ></input>
               <br />
               <label htmlFor="system_size">System Size (MW)</label>
@@ -60,7 +79,10 @@ export default function AddProjectModal({ toggleModal }) {
                 type="number"
                 name="system_size"
                 id="system_size"
-                // value={newProject.system_size}
+                inputMode="decimal"
+                pattern="[0-9]*[.,]?[0-9]*"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
               ></input>
               <br />
               <label htmlFor="utility">Utility</label>
@@ -68,11 +90,17 @@ export default function AddProjectModal({ toggleModal }) {
                 type="text"
                 name="utility"
                 id="utility"
-                // value={newProject.utility}
+                value={utility}
+                onChange={(e) => setUtility(e.target.value)}
               ></input>
               <br />
               <label htmlFor="proj_status">Status</label>
-              <select name="proj_status" id="proj_status">
+              <select
+                name="proj_status"
+                id="proj_status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
                 <option value="planning">Planning</option>
                 <option value="dev">Development</option>
                 <option value="construction">Construction</option>
@@ -85,11 +113,12 @@ export default function AddProjectModal({ toggleModal }) {
                 type="text"
                 name="proj_lead"
                 id="proj_lead"
-                // value={newProject.proj_lead}
+                value={lead}
+                onChange={(e) => setLead(e.target.value)}
               ></input>
               <br />
               <button onClick={toggleModal}>Cancel</button>
-              <button type="submit">Submit</button>
+              <button type="submit">Add</button>
             </form>
           </div>
         </div>

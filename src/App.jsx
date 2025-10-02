@@ -35,19 +35,6 @@ function parseData(data) {
   return parsedProjects;
 }
 
-// const test_project = {
-//   id: 6,
-//   location: {
-//     lat: 39.9526,
-//     lng: -75.1652,
-//   },
-//   proj_lead: "Zara",
-//   proj_name: " Cedar Creek",
-//   proj_status: "Development",
-//   system_size: 136.6,
-//   utility: "Apex Energy",
-// };
-
 function App() {
   // url and token for fetch request from airtable
   const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
@@ -106,14 +93,12 @@ function App() {
         {
           fields: {
             id: newProject.id,
-            location: {
-              lat: newProject.location.lat,
-              lng: newProject.location.lng,
-            },
-            proj_lead: newProject.proj_lead,
-            proj_name: newProject.proj_name,
-            proj_status: newProject.proj_status,
-            system_size: newProject.system_size,
+            lat: newProject.location.lat,
+            lng: newProject.location.lng,
+            project_lead: newProject.proj_lead,
+            project_name: newProject.proj_name,
+            status: newProject.proj_status,
+            system_size_mw: newProject.system_size,
             utility: newProject.utility,
           },
         },
@@ -129,9 +114,13 @@ function App() {
       body: JSON.stringify(payload),
     };
     try {
-      const resp = await fetch(encodeUrl(), options);
+      const resp = await fetch(url, options);
+      console.log("resp: ", resp);
       // show error message if response not ok
       if (!resp.ok) {
+        // throw new Error(resp.message);
+        const errorText = await resp.text();
+        console.log("Error response:", errorText); // Log the actual error
         throw new Error(resp.message);
       }
       // if response is ok, convert promise from json; destructure records
@@ -152,8 +141,6 @@ function App() {
     <>
       {projectModal && (
         <AddProjectModal
-          projectModal={projectModal}
-          setProjectModal={setProjectModal}
           toggleModal={toggleModal}
           addNewProject={addNewProject}
         />
