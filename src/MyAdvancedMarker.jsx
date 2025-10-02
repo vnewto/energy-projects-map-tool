@@ -1,7 +1,22 @@
-export default function MyAdvancedMarker() {
+import { AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
+
+//function that maps over projects and pulls the location of each one and sets that as the position of each advanced marker
+
+export default function MyAdvancedMarker({
+  position,
+  handleClickProject,
+  project,
+}) {
   return (
-    <div>
-      <h1>This is the MyAdvancedMarker component</h1>
-    </div>
+    <AdvancedMarker
+      position={position}
+      onClick={() => handleClickProject(project)}
+    >
+      <Pin
+        background={"#0f9d58"}
+        borderColor={"#006425"}
+        glyphColor={"#60d98f"}
+      />
+    </AdvancedMarker>
   );
 }
