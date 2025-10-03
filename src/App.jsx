@@ -113,6 +113,7 @@ function App() {
       },
       body: JSON.stringify(payload),
     };
+    console.log("payload: ", payload);
     try {
       const resp = await fetch(url, options);
       console.log("resp: ", resp);

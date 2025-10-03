@@ -28,6 +28,8 @@ export default function AddProjectModal({ toggleModal, addNewProject }) {
       utility: utility,
     };
 
+    console.log("new_project: ", newProject);
+
     console.log("Form submitted");
     addNewProject(newProject);
     toggleModal();
@@ -99,13 +101,18 @@ export default function AddProjectModal({ toggleModal, addNewProject }) {
                 name="proj_status"
                 id="proj_status"
                 value={status}
-                onChange={(e) => setStatus(e.target.value)}
+                onChange={(e) => {
+                  console.log("status changed");
+                  setStatus(e.target.value);
+                  console.log("e.target.value: ", e.target.value);
+                }}
               >
-                <option value="planning">Planning</option>
-                <option value="dev">Development</option>
-                <option value="construction">Construction</option>
-                <option value="op">Operational</option>
-                <option value="dec">Decommissioning</option>
+                <option value="" selected disabled hidden>Choose here</option>
+                <option value="Planning">Planning</option>
+                <option value="Development">Development</option>
+                <option value="Construction">Construction</option>
+                <option value="Operational">Operational</option>
+                <option value="Decommissioning">Decommissioning</option>
               </select>
               <br />
               <label htmlFor="proj_lead">Project Lead</label>
