@@ -35,34 +35,6 @@ function parseData(data) {
   return parsedProjects;
 }
 
-// //function to parse data received from Airtable and turn it into an array of objects
-// function parseProject(data) {
-//   //create an empty array to store the objects
-//   const parsedProjects = [];
-//   //map over data.records
-//   const dataRecords = data.records;
-//   dataRecords.map((record) => {
-//     //create empty object
-//     const object = {};
-//     //go into fields property
-//     const fields = record.fields;
-//     //create all the object properties
-//     object.id = fields.id;
-//     object.proj_name = fields.project_name;
-//     object.location = {
-//       lat: fields.lat,
-//       lng: fields.lng,
-//     };
-//     object.utility = fields.utility;
-//     object.system_size = fields.system_size_mw;
-//     object.proj_status = fields.status;
-//     object.proj_lead = fields.project_lead;
-//     //push object into parsedData variable
-//     parsedProjects.push(object);
-//   });
-//   return parsedProjects;
-// }
-
 function App() {
   // url and token for fetch request from airtable
   const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
@@ -73,6 +45,7 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [projectModal, setProjectModal] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     //fetch projects list from airtable
@@ -97,6 +70,7 @@ function App() {
 
         setProjects(parsedProjects);
       } catch (error) {
+        setError(error.message);
         console.error("Fetch error: ", error);
       }
     };
@@ -162,8 +136,11 @@ function App() {
       setSelectedProject(parsedNewProject[0]);
     } catch (error) {
       console.log(error.message);
+      setError(error.message);
     }
   }
+
+  //also setError when doing fetch requests for update and delete functions
 
   return (
     <>
@@ -177,6 +154,7 @@ function App() {
         <h1>Projects Map Tool</h1>
         <FilterOptions></FilterOptions>
         <button onClick={toggleModal}>Add New Project</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <MyMap
           projects={projects}
           selectedProject={selectedProject}
