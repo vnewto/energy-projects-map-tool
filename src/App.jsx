@@ -35,6 +35,34 @@ function parseData(data) {
   return parsedProjects;
 }
 
+// //function to parse data received from Airtable and turn it into an array of objects
+// function parseProject(data) {
+//   //create an empty array to store the objects
+//   const parsedProjects = [];
+//   //map over data.records
+//   const dataRecords = data.records;
+//   dataRecords.map((record) => {
+//     //create empty object
+//     const object = {};
+//     //go into fields property
+//     const fields = record.fields;
+//     //create all the object properties
+//     object.id = fields.id;
+//     object.proj_name = fields.project_name;
+//     object.location = {
+//       lat: fields.lat,
+//       lng: fields.lng,
+//     };
+//     object.utility = fields.utility;
+//     object.system_size = fields.system_size_mw;
+//     object.proj_status = fields.status;
+//     object.proj_lead = fields.project_lead;
+//     //push object into parsedData variable
+//     parsedProjects.push(object);
+//   });
+//   return parsedProjects;
+// }
+
 function App() {
   // url and token for fetch request from airtable
   const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
@@ -125,14 +153,13 @@ function App() {
         throw new Error(resp.message);
       }
       // if response is ok, convert promise from json; destructure records
-      const { records } = await resp.json();
-      const savedProject = {
-        ...records[0],
-        ...records[0].fields,
-      };
+      const data = await resp.json();
+      console.log("data: ", data);
+      const parsedNewProject = parseData(data);
+      console.log("parsedNewProject: ", parsedNewProject);
       //update projects with the new project added on
-      setProjects([...projects, savedProject]);
-      setSelectedProject(savedProject);
+      setProjects([...projects, parsedNewProject[0]]);
+      setSelectedProject(parsedNewProject[0]);
     } catch (error) {
       console.log(error.message);
     }
