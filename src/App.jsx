@@ -37,9 +37,9 @@ function parseData(data) {
 
 function App() {
   // url and token for fetch request from airtable
-  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
-    import.meta.env.VITE_TABLE_NAME
-  }`;
+  const [url, setUrl] = useState(`https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+          import.meta.env.VITE_TABLE_NAME
+        }`);
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
 
   const [projects, setProjects] = useState([]);
@@ -51,16 +51,17 @@ function App() {
   const [filterField, setFilterField] = useState("");
   const [filterValue, setFilterValue] = useState("");
 
-  // create a variable encodeUrl and assign it to a useCallback. this function will be used to build the url for the filter requests
-  const encodeUrl = useCallback(() => {
-    // define a template literal that combines the 2 sort query parameters, field and direction
-    let filterQuery = `?filterByFormula=${filterField}+%3D+'${filterValue}'&sort%5B0%5D%5Bfield%5D=&sort%5B0%5D%5Bdirection%5D=asc`;
-    // Create an updatable variable (let) searchQuery & set to an empty string
-    // return encode uri method that puts together the url with the filter options
-    return encodeURI(`${url}${filterQuery}`);
-  }, [filterField, filterValue, url]);
-
   useEffect(() => {
+    //update url to include filters if selected
+    if (filterField && filterValue) {
+      const encodedFormula = encodeURI(`${filterField}='${filterValue}'`);
+      setUrl(
+        `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+          import.meta.env.VITE_TABLE_NAME
+        }?filterByFormula=${encodedFormula}`
+      );
+    }
+    console.log("url: ", url);
     //fetch projects list from airtable
     const fetchMapData = async () => {
       const options = {
@@ -88,7 +89,7 @@ function App() {
       }
     };
     fetchMapData();
-  }, [token, url]);
+  }, [token, url, filterField, filterValue]);
 
   //function to set the selected project when it's clicked on either as an AdvancedMarker or as a Project in the Projects list
   const handleClickProject = useCallback(
@@ -168,7 +169,9 @@ function App() {
         <FilterOptions
           projects={projects}
           filterField={filterField}
+          setFilterField={setFilterField}
           filterValue={filterValue}
+          setFilterValue={setFilterValue}
         ></FilterOptions>
         <button onClick={toggleModal}>Add New Project</button>
         {error && <p style={{ color: "red" }}>{error}</p>}

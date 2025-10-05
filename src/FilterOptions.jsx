@@ -1,24 +1,40 @@
-export default function FilterOptions({ projects, filterField, filterValue }) {
-  function defineStatusOptions() {
-    //create an empty array
-    const array = [];
-    //map over projects
-    projects.map((project) => {
-      //access status property for each project
-      const status = project["proj_status"];
-      //push for each project into the empty array
-      array.push(status);
-    });
-    //convert the array into a set with unique values
-    const set = new Set(array);
-    //convert set back to a new statusArray
-    const statusArray = [...set];
-    //return statusArray
-    console.log(statusArray);
-    return statusArray;
+import { useState, useEffect } from "react";
+
+export default function FilterOptions({
+  projects,
+  setFilterField,
+  setFilterValue,
+  filterField,
+  filterValue,
+}) {
+
+const statuses = ['Planning', 'Development', 'Construction', 'Operational', 'Decommissioning'];
+
+  //declare local state variables for setting the filter fields and values based on user input
+  const [selectedField, setSelectedField] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
+
+  // define functions for handling change events in form
+  // prevent the page from refreshing when a change event occurs
+  function preventRefresh(event) {
+    event.preventDefault();
   }
-  const proj_statuses = defineStatusOptions();
-  console.log("proj_statuses: ", proj_statuses);
+  //set filter field
+  function handleFilterField(event) {
+    setFilterField(event.target.value);
+  }
+  //set filter value
+  function handleFilterValue(event) {
+    setFilterValue(event.target.value);
+  }
+  function clearFilters() {
+    preventRefresh;
+    setFilterField("");
+    setFilterValue("");
+  }
+
+  console.log("filterField: ", filterField);
+  console.log("filterValue: ", filterValue);
 
   return (
     <div>
@@ -26,55 +42,50 @@ export default function FilterOptions({ projects, filterField, filterValue }) {
       <form>
         <div>
           <label>Filter by: </label>
-          <select name="field" id="field">
-            <option defaultValue="" disabled hidden>
-              Select option
+          <select
+            name="field"
+            id="field"
+            value={selectedField}
+            onChange={(event) => {
+              preventRefresh;
+              console.log("status of selectedField changed");
+              setFilterField(event.target.value);
+              console.log("event.target.value: ", event.target.value);
+            }}
+          >
+            <option defaultValue="">Select option</option>
+            <option key="status" value="status">
+              Project Status
             </option>
-            <option value="status">Project Status</option>
           </select>
         </div>
         <div>
           <select name="operator">
-            <option defaultValue="" disabled hidden>
-              Select option
-            </option>
+            <option defaultValue="">Select option</option>
             <option value="is">is</option>
           </select>
         </div>
         <div>
-          <select name="proj_status" id="proj_status">
-            <option defaultValue="" disabled hidden>
-              Select value
-            </option>
-            {proj_statuses.map((status) => (
-              <option key={status} value={status}>
-                {status.charAt(0).toUpperCase() + status.slice(1)}
-              </option>
+          <select
+            name="proj_status"
+            id="proj_status"
+            value={selectedValue}
+            onChange={(event) => {
+              preventRefresh;
+              console.log("status of selectedValue changed");
+              setFilterValue(event.target.value);
+              console.log("event.target.value: ", event.target.value);
+            }}
+          >
+            <option defaultValue="">Select value</option>
+            {statuses.map((status) => (
+              <option key={status} value={status}>{status}</option>
             ))}
           </select>
         </div>
-
-        {/* <label htmlFor="proj_status">Filter by: </label>
-              <select
-                name="proj_status"
-                id="proj_status"
-                value={status}
-                onChange={(e) => {
-                  console.log("status changed");
-                  setStatus(e.target.value);
-                  console.log("e.target.value: ", e.target.value);
-                }}
-              >
-                <option value="" selected disabled hidden>Choose here</option>
-                <option value="Planning">Planning</option>
-                <option value="Development">Development</option>
-                <option value="Construction">Construction</option>
-                <option value="Operational">Operational</option>
-                <option value="Decommissioning">Decommissioning</option>
-              </select> */}
       </form>
       {/* clear filters button to reset filteredProjects to empty */}
-      <button>Clear Filters</button>
+      <button onClick={clearFilters}>Clear Filters</button>
     </div>
   );
 }
