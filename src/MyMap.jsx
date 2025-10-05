@@ -7,6 +7,7 @@ export default function MyMap({
   selectedProject,
   handleClickProject,
 }) {
+
   const default_center = {
     location: {
       lat: 37.09024,

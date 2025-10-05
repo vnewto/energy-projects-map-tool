@@ -1,7 +1,7 @@
 export default function FilterOptions() {
-    return(
-        <div>
-            <h1>This is the FilterOptions Component</h1>
-        </div>
-    )
+  return (
+    <div>
+      <h2>FilterOptions component will go here</h2>
+    </div>
+  );
 }

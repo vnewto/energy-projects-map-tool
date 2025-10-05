@@ -35,19 +35,6 @@ function parseData(data) {
   return parsedProjects;
 }
 
-// const test_project = {
-//   id: 6,
-//   location: {
-//     lat: 39.9526,
-//     lng: -75.1652,
-//   },
-//   proj_lead: "Zara",
-//   proj_name: " Cedar Creek",
-//   proj_status: "Development",
-//   system_size: 136.6,
-//   utility: "Apex Energy",
-// };
-
 function App() {
   // url and token for fetch request from airtable
   const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
@@ -57,6 +44,8 @@ function App() {
 
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [projectModal, setProjectModal] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     //fetch projects list from airtable
@@ -81,6 +70,7 @@ function App() {
 
         setProjects(parsedProjects);
       } catch (error) {
+        setError(error.message);
         console.error("Fetch error: ", error);
       }
     };
@@ -93,28 +83,96 @@ function App() {
     [setSelectedProject]
   );
 
+  //function that changes projectModal state to false if true, or true if false
+  const toggleModal = () => {
+    setProjectModal(!projectModal);
+  };
+
+  //function for adding a new project to the list
+  async function addNewProject(newProject) {
+    const payload = {
+      records: [
+        {
+          fields: {
+            id: newProject.id,
+            lat: newProject.location.lat,
+            lng: newProject.location.lng,
+            project_lead: newProject.proj_lead,
+            project_name: newProject.proj_name,
+            status: newProject.proj_status,
+            system_size_mw: newProject.system_size,
+            utility: newProject.utility,
+          },
+        },
+      ],
+    };
+    //define options for fetch request
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    console.log("payload: ", payload);
+    try {
+      const resp = await fetch(url, options);
+      console.log("resp: ", resp);
+      // show error message if response not ok
+      if (!resp.ok) {
+        // throw new Error(resp.message);
+        const errorText = await resp.text();
+        console.log("Error response:", errorText); // Log the actual error
+        throw new Error(resp.message);
+      }
+      // if response is ok, convert promise from json; destructure records
+      const data = await resp.json();
+      console.log("data: ", data);
+      const parsedNewProject = parseData(data);
+      console.log("parsedNewProject: ", parsedNewProject);
+      //update projects with the new project added on
+      setProjects([...projects, parsedNewProject[0]]);
+      setSelectedProject(parsedNewProject[0]);
+    } catch (error) {
+      console.log(error.message);
+      setError(error.message);
+    }
+  }
+
+  //also setError when doing fetch requests for update and delete functions
+
   return (
     <>
-      <h1>Projects Map Tool</h1>
-      <FilterOptions></FilterOptions>
-      <AddProjectModal />
-      <MyMap
-        projects={projects}
-        selectedProject={selectedProject}
-        setSelectedProject={setSelectedProject}
-        handleClickProject={handleClickProject}
-      ></MyMap>
+      {projectModal && (
+        <AddProjectModal
+          toggleModal={toggleModal}
+          addNewProject={addNewProject}
+        />
+      )}
       <div>
-        <ul>
-          {projects.map((project) => (
-            <li key={project.id}>
-              <Project
-                project={project}
-                handleClickProject={handleClickProject}
-              ></Project>
-            </li>
-          ))}
-        </ul>
+        <h1>Projects Map Tool</h1>
+        <FilterOptions></FilterOptions>
+        <button onClick={toggleModal}>Add New Project</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <MyMap
+          projects={projects}
+          selectedProject={selectedProject}
+          setSelectedProject={setSelectedProject}
+          handleClickProject={handleClickProject}
+        ></MyMap>
+        <div>
+          <ul>
+            {projects.map((project) => (
+              <li key={project.id}>
+                <Project
+                  project={project}
+                  handleClickProject={handleClickProject}
+                ></Project>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );
