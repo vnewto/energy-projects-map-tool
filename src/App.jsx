@@ -151,8 +151,8 @@ function App() {
         />
       )}
       <div>
-        <h1>Projects Map Tool</h1>
-        <FilterOptions></FilterOptions>
+        <h1>Wind Farms Map Dashboard</h1>
+        <FilterOptions projects={projects}></FilterOptions>
         <button onClick={toggleModal}>Add New Project</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <MyMap
