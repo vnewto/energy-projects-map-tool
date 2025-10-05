@@ -37,9 +37,11 @@ function parseData(data) {
 
 function App() {
   // url and token for fetch request from airtable
-  const [url, setUrl] = useState(`https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
-          import.meta.env.VITE_TABLE_NAME
-        }`);
+  const [url, setUrl] = useState(
+    `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+      import.meta.env.VITE_TABLE_NAME
+    }`
+  );
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
 
   const [projects, setProjects] = useState([]);
@@ -59,6 +61,12 @@ function App() {
         `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
           import.meta.env.VITE_TABLE_NAME
         }?filterByFormula=${encodedFormula}`
+      );
+    } else {
+      setUrl(
+        `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+          import.meta.env.VITE_TABLE_NAME
+        }`
       );
     }
     console.log("url: ", url);
