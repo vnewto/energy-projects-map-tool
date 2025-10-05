@@ -47,6 +47,19 @@ function App() {
   const [projectModal, setProjectModal] = useState(false);
   const [error, setError] = useState("");
 
+  //define state variables for filtering projects list
+  const [filterField, setFilterField] = useState("");
+  const [filterValue, setFilterValue] = useState("");
+
+  // create a variable encodeUrl and assign it to a useCallback. this function will be used to build the url for the filter requests
+  const encodeUrl = useCallback(() => {
+    // define a template literal that combines the 2 sort query parameters, field and direction
+    let filterQuery = `?filterByFormula=${filterField}+%3D+'${filterValue}'&sort%5B0%5D%5Bfield%5D=&sort%5B0%5D%5Bdirection%5D=asc`;
+    // Create an updatable variable (let) searchQuery & set to an empty string
+    // return encode uri method that puts together the url with the filter options
+    return encodeURI(`${url}${filterQuery}`);
+  }, [filterField, filterValue, url]);
+
   useEffect(() => {
     //fetch projects list from airtable
     const fetchMapData = async () => {
@@ -152,7 +165,11 @@ function App() {
       )}
       <div>
         <h1>Wind Farms Map Dashboard</h1>
-        <FilterOptions projects={projects}></FilterOptions>
+        <FilterOptions
+          projects={projects}
+          filterField={filterField}
+          filterValue={filterValue}
+        ></FilterOptions>
         <button onClick={toggleModal}>Add New Project</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <MyMap

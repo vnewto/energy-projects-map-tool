@@ -1,4 +1,4 @@
-export default function FilterOptions({ projects }) {
+export default function FilterOptions({ projects, filterField, filterValue }) {
   function defineStatusOptions() {
     //create an empty array
     const array = [];
@@ -20,25 +20,31 @@ export default function FilterOptions({ projects }) {
   const proj_statuses = defineStatusOptions();
   console.log("proj_statuses: ", proj_statuses);
 
-  //map over the array and create an option element for each
-
   return (
     <div>
-      {/* form with two inputs, one for field and one for value */}
+      {/* form with two select inputs, one for field and one for value */}
       <form>
         <div>
           <label>Filter by: </label>
           <select name="field" id="field">
-            <option value="" selected disabled hidden>
-              Choose here
+            <option defaultValue="" disabled hidden>
+              Select option
             </option>
+            <option value="status">Project Status</option>
           </select>
         </div>
         <div>
-          <label>is </label>
+          <select name="operator">
+            <option defaultValue="" disabled hidden>
+              Select option
+            </option>
+            <option value="is">is</option>
+          </select>
+        </div>
+        <div>
           <select name="proj_status" id="proj_status">
-            <option value="" selected disabled hidden>
-              Choose here
+            <option defaultValue="" disabled hidden>
+              Select value
             </option>
             {proj_statuses.map((status) => (
               <option key={status} value={status}>
