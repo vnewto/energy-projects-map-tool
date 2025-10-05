@@ -1,7 +1,4 @@
-import { useState, useEffect } from "react";
-
 export default function FilterOptions({
-  projects,
   setFilterField,
   setFilterValue,
   filterField,
@@ -13,6 +10,14 @@ export default function FilterOptions({
     "Construction",
     "Operational",
     "Decommissioning",
+  ];
+
+  const utilities = [
+    "Apex Energy",
+    "Clearwater Electric",
+    "Northpoint Energy",
+    "Meridian Power",
+    "Summit Valley",
   ];
 
   function clearFilters() {
@@ -27,6 +32,7 @@ export default function FilterOptions({
     <div>
       {/* form with two select inputs, one for field and one for value */}
       <form>
+        {/* Select Field Input */}
         <div>
           <label>Filter by: </label>
           <select
@@ -45,14 +51,21 @@ export default function FilterOptions({
             <option key="status" value="status">
               Project Status
             </option>
+            <option key="utility" value="utility">
+              Utility
+            </option>
           </select>
         </div>
+
+        {/* Select Operation Input */}
         <div>
           <select name="operator">
             <option defaultValue="">Select option</option>
-            <option value="is">is</option>
+            <option value="is">equals</option>
           </select>
         </div>
+
+        {/* Select Value Input */}
         <div>
           <select
             name="proj_status"
@@ -67,11 +80,20 @@ export default function FilterOptions({
             <option defaultValue="" value="">
               Select value
             </option>
-            {statuses.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
+            {/* show status options only if filterfield is set to status */}
+            {filterField === "status" &&
+              statuses.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            {/* show utility options only if filterfield is set to utility */}
+            {filterField === "utility" &&
+              utilities.map((utility) => (
+                <option key={utility} value={utility}>
+                  {utility}
+                </option>
+              ))}
           </select>
         </div>
       </form>

@@ -175,7 +175,6 @@ function App() {
       <div>
         <h1>Wind Farms Map Dashboard</h1>
         <FilterOptions
-          projects={projects}
           filterField={filterField}
           setFilterField={setFilterField}
           filterValue={filterValue}
