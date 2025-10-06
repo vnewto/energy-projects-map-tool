@@ -1,9 +1,21 @@
 export default function FilterOptions({
   setFilterField,
   setFilterValue,
+  filterOperator,
+  setFilterOperator,
   filterField,
   filterValue,
 }) {
+  const operators = [
+    { opKey: "greater than", opValue: ">" },
+    { opKey: "greater than or equal to", opValue: ">=" },
+    { opKey: "less than", opValue: "<" },
+    { opKey: "less than or equal to", opValue: "<=" },
+    { opKey: "equals", opValue: "=" },
+  ];
+
+  const mWs = [50, 100, 150];
+
   const statuses = [
     "Planning",
     "Development",
@@ -23,9 +35,11 @@ export default function FilterOptions({
   function clearFilters() {
     setFilterField("");
     setFilterValue("");
+    setFilterOperator("");
   }
 
   console.log("filterField: ", filterField);
+  console.log("filterOperator: ", filterOperator);
   console.log("filterValue: ", filterValue);
 
   return (
@@ -54,14 +68,34 @@ export default function FilterOptions({
             <option key="utility" value="utility">
               Utility
             </option>
+            <option key="system_size_mw" value="system_size_mw">
+              System Size (MW)
+            </option>
           </select>
         </div>
 
         {/* Select Operation Input */}
         <div>
-          <select name="operator">
+          <select
+            name="operator"
+            id="operator"
+            value={filterOperator}
+            onChange={(event) => {
+              console.log("status of filterOperator changed");
+              setFilterOperator(event.target.value);
+              console.log("event.target.value: ", event.target.value);
+            }}
+          >
             <option defaultValue="">Select option</option>
-            <option value="is">equals</option>
+            {(filterField === "status" || filterField === "utility") && (
+              <option value="=">equals</option>
+            )}
+            {filterField === "system_size_mw" &&
+              operators.map((operator) => (
+                <option key={operator.opKey} value={operator.opValue}>
+                  {operator.opKey}
+                </option>
+              ))}
           </select>
         </div>
 
@@ -92,6 +126,12 @@ export default function FilterOptions({
               utilities.map((utility) => (
                 <option key={utility} value={utility}>
                   {utility}
+                </option>
+              ))}
+            {filterField === "system_size_mw" &&
+              mWs.map((mW) => (
+                <option key={mW} value={mW}>
+                  {mW}
                 </option>
               ))}
           </select>
