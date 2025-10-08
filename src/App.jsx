@@ -37,9 +37,11 @@ function parseData(data) {
 
 function App() {
   // url and token for fetch request from airtable
-  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
-    import.meta.env.VITE_TABLE_NAME
-  }`;
+  const [url, setUrl] = useState(
+    `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+      import.meta.env.VITE_TABLE_NAME
+    }`
+  );
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
 
   const [projects, setProjects] = useState([]);
@@ -47,7 +49,28 @@ function App() {
   const [projectModal, setProjectModal] = useState(false);
   const [error, setError] = useState("");
 
+  //define state variables for filtering projects list
+  const [filterField, setFilterField] = useState("");
+  const [filterValue, setFilterValue] = useState("");
+  const [filterOperator, setFilterOperator] = useState('');
+
   useEffect(() => {
+    //update url to include filters if selected
+    if (filterField && filterValue) {
+      const encodedFormula = encodeURI(`${filterField}${filterOperator}'${filterValue}'`);
+      setUrl(
+        `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+          import.meta.env.VITE_TABLE_NAME
+        }?filterByFormula=${encodedFormula}`
+      );
+    } else {
+      setUrl(
+        `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+          import.meta.env.VITE_TABLE_NAME
+        }`
+      );
+    }
+    console.log("url: ", url);
     //fetch projects list from airtable
     const fetchMapData = async () => {
       const options = {
@@ -75,7 +98,7 @@ function App() {
       }
     };
     fetchMapData();
-  }, [token, url]);
+  }, [token, url, filterField, filterValue, filterOperator]);
 
   //function to set the selected project when it's clicked on either as an AdvancedMarker or as a Project in the Projects list
   const handleClickProject = useCallback(
@@ -151,8 +174,15 @@ function App() {
         />
       )}
       <div>
-        <h1>Projects Map Tool</h1>
-        <FilterOptions></FilterOptions>
+        <h1>Wind Farms Map Dashboard</h1>
+        <FilterOptions
+          filterField={filterField}
+          setFilterField={setFilterField}
+          filterOperator={filterOperator}
+          setFilterOperator={setFilterOperator}
+          filterValue={filterValue}
+          setFilterValue={setFilterValue}
+        ></FilterOptions>
         <button onClick={toggleModal}>Add New Project</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <MyMap
