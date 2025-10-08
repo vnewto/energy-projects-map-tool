@@ -5,6 +5,7 @@ import MyMap from "./MyMap.jsx";
 import AddProjectModal from "./AddProjectModal.jsx";
 import Project from "./Project.jsx";
 import FilterOptions from "./FilterOptions.jsx";
+import UpdateProjectModal from "./UpdateProjectModal.jsx";
 
 //function to parse data received from Airtable and turn it into an array of objects
 function parseData(data) {
@@ -47,6 +48,7 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [projectModal, setProjectModal] = useState(false);
   const [error, setError] = useState("");
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   //define state variables for filtering projects list
   const [filterField, setFilterField] = useState("");
@@ -109,9 +111,14 @@ function App() {
     [setSelectedProject]
   );
 
-  //function that changes projectModal state to false if true, or true if false
+  //function that changes the addNewProject Modal state to false if true, or true if false
   const toggleModal = () => {
     setProjectModal(!projectModal);
+  };
+
+  //function that changes the showUpdateModal state to false if true, or true if false
+  const toggleUpdateModal = () => {
+    setShowUpdateModal(!showUpdateModal);
   };
 
   //function for adding a new project to the list
@@ -167,6 +174,13 @@ function App() {
   }
 
   //also setError when doing fetch requests for update and delete functions
+  //UPDAT PROJECT
+  //payload with method Patch and pass in an updatedProject variable
+  //reset projects to the updated project added on
+  //set the updated project as the selectedProject
+  //inside updateProject modal:
+  //create local state for each field and set it to a variable originalProject
+  //as user types in, use an onChange event to reset state to the value of what they typed in?
 
   return (
     <>
@@ -175,6 +189,9 @@ function App() {
           toggleModal={toggleModal}
           addNewProject={addNewProject}
         />
+      )}
+      {showUpdateModal && (
+        <UpdateProjectModal toggleUpdateModal={toggleUpdateModal} />
       )}
       <div>
         <h1>Wind Farms Map Dashboard</h1>
@@ -203,6 +220,7 @@ function App() {
                   project={project}
                   handleClickProject={handleClickProject}
                   selectedProject={selectedProject}
+                  toggleUpdateModal={toggleUpdateModal}
                 ></Project>
               </li>
             ))}
