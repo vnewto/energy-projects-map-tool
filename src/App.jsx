@@ -51,12 +51,14 @@ function App() {
   //define state variables for filtering projects list
   const [filterField, setFilterField] = useState("");
   const [filterValue, setFilterValue] = useState("");
-  const [filterOperator, setFilterOperator] = useState('');
+  const [filterOperator, setFilterOperator] = useState("");
 
   useEffect(() => {
     //update url to include filters if selected
     if (filterField && filterValue) {
-      const encodedFormula = encodeURI(`${filterField}${filterOperator}'${filterValue}'`);
+      const encodedFormula = encodeURI(
+        `${filterField}${filterOperator}'${filterValue}'`
+      );
       setUrl(
         `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
           import.meta.env.VITE_TABLE_NAME
@@ -101,7 +103,9 @@ function App() {
 
   //function to set the selected project when it's clicked on either as an AdvancedMarker or as a Project in the Projects list
   const handleClickProject = useCallback(
-    (project) => setSelectedProject(project),
+    (project) => {
+      setSelectedProject(project);
+    },
     [setSelectedProject]
   );
 
@@ -198,6 +202,7 @@ function App() {
                 <Project
                   project={project}
                   handleClickProject={handleClickProject}
+                  selectedProject={selectedProject}
                 ></Project>
               </li>
             ))}
