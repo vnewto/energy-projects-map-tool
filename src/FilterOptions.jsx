@@ -5,6 +5,7 @@ export default function FilterOptions({
   setFilterOperator,
   filterField,
   filterValue,
+  setSelectedProject,
 }) {
   const operators = [
     { opKey: "greater than", opValue: ">" },
@@ -36,6 +37,7 @@ export default function FilterOptions({
     setFilterField("");
     setFilterValue("");
     setFilterOperator("");
+    setSelectedProject("");
   }
 
   console.log("filterField: ", filterField);

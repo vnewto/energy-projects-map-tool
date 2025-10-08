@@ -4,7 +4,6 @@ import "./App.css";
 import MyMap from "./MyMap.jsx";
 import AddProjectModal from "./AddProjectModal.jsx";
 import Project from "./Project.jsx";
-import MyInfoWindow from "./MyInfoWindow.jsx";
 import FilterOptions from "./FilterOptions.jsx";
 
 //function to parse data received from Airtable and turn it into an array of objects
@@ -182,6 +181,7 @@ function App() {
           setFilterOperator={setFilterOperator}
           filterValue={filterValue}
           setFilterValue={setFilterValue}
+          setSelectedProject={setSelectedProject}
         ></FilterOptions>
         <button onClick={toggleModal}>Add New Project</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
