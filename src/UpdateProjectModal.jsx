@@ -1,13 +1,40 @@
+import { useState } from "react";
 import styles from "./ProjectModal.module.css";
 
 export default function UpdateProjectModal({
   toggleUpdateModal,
   updateProject,
+  selectedProject,
 }) {
+  //fill in fields of modal with the preexisting project information
+  //create state variable for each new project key/value pair
+  const [lat, setLat] = useState(selectedProject.location.lat);
+  const [lng, setLng] = useState(selectedProject.location.lng);
+  const [lead, setLead] = useState(selectedProject.proj_lead);
+  const [name, setName] = useState(selectedProject.proj_name);
+  const [status, setStatus] = useState(selectedProject.proj_status);
+  const [size, setSize] = useState(selectedProject.system_size);
+  const [utility, setUtility] = useState(selectedProject.utility);
+
   const handleSubmit = (e) => {
     //prevent page from refreshing
     e.preventDefault();
-    updateProject();
+
+    const updatedProject = {
+      id: selectedProject.id,
+      location: {
+        lat: Number(lat),
+        lng: Number(lng),
+      },
+      proj_lead: lead,
+      proj_name: name,
+      proj_status: status,
+      system_size: Number(size),
+      utility: utility,
+    };
+
+    updateProject(updatedProject);
+    console.log("updatedProject: ", updatedProject);
     toggleUpdateModal();
   };
 
@@ -22,8 +49,8 @@ export default function UpdateProjectModal({
               type="text"
               name="proj_name"
               id="proj_name"
-              value="new project name"
-              onChange={() => console.log("project name changed")}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             ></input>
             <button onClick={toggleUpdateModal}>Cancel</button>
             <button type="submit">Update</button>

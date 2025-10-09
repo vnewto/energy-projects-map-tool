@@ -176,6 +176,13 @@ function App() {
     console.log("Project updated, closing modal");
   }
 
+  //UPDATE PROJECT FUNCTION
+  //payload with method Patch and pass in an updatedProject variable
+  //in fields, only send it if the field changed?
+  //reset the updated project to the project (using the spread operator) with the updated fields
+  //reset projects to the updated project added on
+  //set the updated project as the selectedProject
+
   // async function updateProject(updatedProject) {
   //   const payload = {
   //     records: [
@@ -211,7 +218,7 @@ function App() {
   //       console.log("Error response for update resp:", errorText); // Log the actual error
   //       throw new Error(resp.message);
   //     }
-  //     // if response is ok, convert promise from json; destructure records
+  //     // if response is ok, convert promise from json
   //     const data = await resp.json();
   //     console.log("data: ", data);
   //     const parsedNewProject = parseData(data);
@@ -226,13 +233,7 @@ function App() {
   // }
 
   //also setError when doing fetch requests for update and delete functions
-  //UPDATE PROJECT
-  //payload with method Patch and pass in an updatedProject variable
-  //reset projects to the updated project added on
-  //set the updated project as the selectedProject
-  //inside updateProject modal:
-  //create local state for each field and set it to a variable originalProject
-  //as user types in, use an onChange event to reset state to the value of what they typed in?
+
 
   return (
     <>
@@ -246,6 +247,7 @@ function App() {
         <UpdateProjectModal
           toggleUpdateModal={toggleUpdateModal}
           updateProject={updateProject}
+          selectedProject={selectedProject}
         />
       )}
       <div>
