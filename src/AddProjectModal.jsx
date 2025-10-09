@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./AddProjectModal.module.css";
+import styles from "./ProjectModal.module.css";
 
 export default function AddProjectModal({ toggleModal, addNewProject }) {
   //create state variable for each new project key/value pair
@@ -107,7 +107,9 @@ export default function AddProjectModal({ toggleModal, addNewProject }) {
                   console.log("e.target.value: ", e.target.value);
                 }}
               >
-                <option value="" selected disabled hidden>Choose here</option>
+                <option value="" selected disabled hidden>
+                  Choose here
+                </option>
                 <option value="Planning">Planning</option>
                 <option value="Development">Development</option>
                 <option value="Construction">Construction</option>

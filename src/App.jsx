@@ -148,7 +148,6 @@ function App() {
       },
       body: JSON.stringify(payload),
     };
-    console.log("payload: ", payload);
     try {
       const resp = await fetch(url, options);
       console.log("resp: ", resp);
@@ -173,8 +172,61 @@ function App() {
     }
   }
 
+  async function updateProject() {
+    console.log("Project updated, closing modal");
+  }
+
+  // async function updateProject(updatedProject) {
+  //   const payload = {
+  //     records: [
+  //       {
+  //         fields: {
+  //           id: updatedProject.id,
+  //           lat: updatedProject.location.lat,
+  //           lng: updatedProject.location.lng,
+  //           project_lead: updatedProject.proj_lead,
+  //           project_name: updatedProject.proj_name,
+  //           status: updatedProject.proj_status,
+  //           system_size_mw: updatedProject.system_size,
+  //           utility: updatedProject.utility,
+  //         },
+  //       },
+  //     ],
+  //   };
+  //   //define options for fetch request
+  //   const options = {
+  //     method: "PATCH",
+  //     headers: {
+  //       Authorization: token,
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
+  //   try {
+  //     const resp = await fetch(url, options);
+  //     console.log("update resp: ", resp);
+  //     // show error message if response not ok
+  //     if (!resp.ok) {
+  //       // throw new Error(resp.message);
+  //       const errorText = await resp.text();
+  //       console.log("Error response for update resp:", errorText); // Log the actual error
+  //       throw new Error(resp.message);
+  //     }
+  //     // if response is ok, convert promise from json; destructure records
+  //     const data = await resp.json();
+  //     console.log("data: ", data);
+  //     const parsedNewProject = parseData(data);
+  //     console.log("parsedNewProject for update: ", parsedNewProject);
+  //     //update projects with the new project added on
+  //     setProjects([...projects, parsedNewProject[0]]);
+  //     setSelectedProject(parsedNewProject[0]);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //     setError(error.message);
+  //   }
+  // }
+
   //also setError when doing fetch requests for update and delete functions
-  //UPDAT PROJECT
+  //UPDATE PROJECT
   //payload with method Patch and pass in an updatedProject variable
   //reset projects to the updated project added on
   //set the updated project as the selectedProject
@@ -191,7 +243,10 @@ function App() {
         />
       )}
       {showUpdateModal && (
-        <UpdateProjectModal toggleUpdateModal={toggleUpdateModal} />
+        <UpdateProjectModal
+          toggleUpdateModal={toggleUpdateModal}
+          updateProject={updateProject}
+        />
       )}
       <div>
         <h1>Wind Farms Map Dashboard</h1>
@@ -213,6 +268,7 @@ function App() {
           handleClickProject={handleClickProject}
         ></MyMap>
         <div>
+          <h2>My Projects</h2>
           <ul>
             {projects.map((project) => (
               <li key={project.id}>
