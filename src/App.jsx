@@ -7,43 +7,40 @@ import Project from "./Project.jsx";
 import FilterOptions from "./FilterOptions.jsx";
 import UpdateProjectModal from "./UpdateProjectModal.jsx";
 
+// url and token for fetch request from airtable
+const token = `Bearer ${import.meta.env.VITE_PAT}`;
+const BASE_URL = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
+  import.meta.env.VITE_TABLE_NAME
+}`;
+
+function parseSingleRecord(record) {
+  //create empty object
+  const object = {};
+  //go into fields property
+  const fields = record.fields;
+  //create all the object properties
+  object.id = record.id;
+  object.proj_name = fields.project_name;
+  object.location = {
+    lat: fields.lat,
+    lng: fields.lng,
+  };
+  object.utility = fields.utility;
+  object.system_size = fields.system_size_mw;
+  object.proj_status = fields.status;
+  object.proj_lead = fields.project_lead;
+
+  return object;
+}
+
 //function to parse data received from Airtable and turn it into an array of objects
 function parseData(data) {
-  //create an empty array to store the objects
-  const parsedProjects = [];
-  //map over data.records
   const dataRecords = data.records;
-  dataRecords.map((record) => {
-    //create empty object
-    const object = {};
-    //go into fields property
-    const fields = record.fields;
-    //create all the object properties
-    object.id = fields.id;
-    object.proj_name = fields.project_name;
-    object.location = {
-      lat: fields.lat,
-      lng: fields.lng,
-    };
-    object.utility = fields.utility;
-    object.system_size = fields.system_size_mw;
-    object.proj_status = fields.status;
-    object.proj_lead = fields.project_lead;
-    //push object into parsedData variable
-    parsedProjects.push(object);
-  });
+  const parsedProjects = dataRecords.map(parseSingleRecord);
   return parsedProjects;
 }
 
 function App() {
-  // url and token for fetch request from airtable
-  const [url, setUrl] = useState(
-    `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
-      import.meta.env.VITE_TABLE_NAME
-    }`
-  );
-  const token = `Bearer ${import.meta.env.VITE_PAT}`;
-
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [projectModal, setProjectModal] = useState(false);
@@ -56,24 +53,19 @@ function App() {
   const [filterOperator, setFilterOperator] = useState("");
 
   useEffect(() => {
+    let url = "";
+
     //update url to include filters if selected
     if (filterField && filterValue) {
       const encodedFormula = encodeURI(
         `${filterField}${filterOperator}'${filterValue}'`
       );
-      setUrl(
-        `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
-          import.meta.env.VITE_TABLE_NAME
-        }?filterByFormula=${encodedFormula}`
-      );
+      url = `${BASE_URL}?filterByFormula=${encodedFormula}`;
     } else {
-      setUrl(
-        `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
-          import.meta.env.VITE_TABLE_NAME
-        }`
-      );
+      url = BASE_URL;
     }
     console.log("url: ", url);
+
     //fetch projects list from airtable
     const fetchMapData = async () => {
       const options = {
@@ -101,7 +93,7 @@ function App() {
       }
     };
     fetchMapData();
-  }, [token, url, filterField, filterValue, filterOperator]);
+  }, [token, filterField, filterValue, filterOperator]);
 
   //function to set the selected project when it's clicked on either as an AdvancedMarker or as a Project in the Projects list
   const handleClickProject = useCallback(
@@ -149,7 +141,7 @@ function App() {
       body: JSON.stringify(payload),
     };
     try {
-      const resp = await fetch(url, options);
+      const resp = await fetch(BASE_URL, options);
       console.log("resp: ", resp);
       // show error message if response not ok
       if (!resp.ok) {
@@ -172,8 +164,54 @@ function App() {
     }
   }
 
-  async function updateProject() {
-    console.log("Project updated, closing modal");
+  async function updateProject(updatedProject) {
+    console.log("updatedProject.id: ", updatedProject.id);
+    const payload = {
+      fields: {
+        lat: updatedProject.location.lat,
+        lng: updatedProject.location.lng,
+        project_lead: updatedProject.proj_lead,
+        project_name: updatedProject.proj_name,
+        status: updatedProject.proj_status,
+        system_size_mw: updatedProject.system_size,
+        utility: updatedProject.utility,
+      },
+    };
+    //define options for fetch request
+    const options = {
+      method: "PATCH",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    try {
+      const resp = await fetch(`${BASE_URL}/${updatedProject.id}`, options);
+      console.log("updateProject fetch resp: ", resp);
+      // show error message if response not ok
+      if (!resp.ok) {
+        // throw new Error(resp.message);
+        const errorText = await resp.text();
+        console.log("Error response:", errorText); // Log the actual error
+        throw new Error(resp.message);
+      }
+      // if response is ok, convert promise from json; destructure records
+      const data = await resp.json();
+      console.log("data: ", data);
+      const parsedUpdatedProject = parseSingleRecord(data);
+      console.log("parsedUpdatedProject: ", parsedUpdatedProject);
+      //find index of the updated project in the projects array and replace it with the updated project
+      const updatedProjIndex = projects.findIndex(
+        (project) => project.id === parsedUpdatedProject.id
+      );
+      console.log("updatedProjIndex: ", updatedProjIndex);
+      setProjects(
+        projects.toSpliced(updatedProjIndex, 1, parsedUpdatedProject)
+      );
+    } catch (error) {
+      setError(error?.message);
+    }
   }
 
   //UPDATE PROJECT FUNCTION
@@ -183,57 +221,7 @@ function App() {
   //reset projects to the updated project added on
   //set the updated project as the selectedProject
 
-  // async function updateProject(updatedProject) {
-  //   const payload = {
-  //     records: [
-  //       {
-  //         fields: {
-  //           id: updatedProject.id,
-  //           lat: updatedProject.location.lat,
-  //           lng: updatedProject.location.lng,
-  //           project_lead: updatedProject.proj_lead,
-  //           project_name: updatedProject.proj_name,
-  //           status: updatedProject.proj_status,
-  //           system_size_mw: updatedProject.system_size,
-  //           utility: updatedProject.utility,
-  //         },
-  //       },
-  //     ],
-  //   };
-  //   //define options for fetch request
-  //   const options = {
-  //     method: "PATCH",
-  //     headers: {
-  //       Authorization: token,
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
-  //   try {
-  //     const resp = await fetch(url, options);
-  //     console.log("update resp: ", resp);
-  //     // show error message if response not ok
-  //     if (!resp.ok) {
-  //       // throw new Error(resp.message);
-  //       const errorText = await resp.text();
-  //       console.log("Error response for update resp:", errorText); // Log the actual error
-  //       throw new Error(resp.message);
-  //     }
-  //     // if response is ok, convert promise from json
-  //     const data = await resp.json();
-  //     console.log("data: ", data);
-  //     const parsedNewProject = parseData(data);
-  //     console.log("parsedNewProject for update: ", parsedNewProject);
-  //     //update projects with the new project added on
-  //     setProjects([...projects, parsedNewProject[0]]);
-  //     setSelectedProject(parsedNewProject[0]);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     setError(error.message);
-  //   }
-  // }
-
   //also setError when doing fetch requests for update and delete functions
-
 
   return (
     <>
