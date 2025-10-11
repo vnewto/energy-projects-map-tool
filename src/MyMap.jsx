@@ -17,7 +17,7 @@ export default function MyMap({
   };
 
   return (
-    <div style={{ height: "75vh", width: "75vw" }}>
+    <div style={{ height: '700px', width: "100%" }}>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLEMAPS_API_KEY}>
         <Map
           defaultZoom={default_center.zoom}

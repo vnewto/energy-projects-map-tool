@@ -1,5 +1,4 @@
 .projContainer {
   display: flex;
-  border: solid red 2px;
   justify-content: space-between;
 }

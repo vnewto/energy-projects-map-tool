@@ -236,6 +236,21 @@ function App() {
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <div className={styles.container}>
+          <div className={styles.projContainer}>
+            <h2>My Projects</h2>
+            <ul className={styles.projList}>
+              {projects.map((project) => (
+                <li key={project.id}>
+                  <Project
+                    project={project}
+                    handleClickProject={handleClickProject}
+                    selectedProject={selectedProject}
+                    toggleUpdateModal={toggleUpdateModal}
+                  ></Project>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className={styles.mapContainer}>
             <div className={styles.mapBar}>
               <FilterOptions
@@ -256,22 +271,6 @@ function App() {
               setSelectedProject={setSelectedProject}
               handleClickProject={handleClickProject}
             ></MyMap>
-          </div>
-
-          <div className={styles.projContainer}>
-            <h2>My Projects</h2>
-            <ul className={styles.projList}>
-              {projects.map((project) => (
-                <li key={project.id}>
-                  <Project
-                    project={project}
-                    handleClickProject={handleClickProject}
-                    selectedProject={selectedProject}
-                    toggleUpdateModal={toggleUpdateModal}
-                  ></Project>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
