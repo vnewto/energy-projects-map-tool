@@ -236,8 +236,8 @@ function App() {
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <div className={styles.container}>
+          <h2 className={styles.projsHeader}>My Projects</h2>
           <div className={styles.projContainer}>
-            <h2>My Projects</h2>
             <ul className={styles.projList}>
               {projects.map((project) => (
                 <li key={project.id}>
@@ -251,20 +251,21 @@ function App() {
               ))}
             </ul>
           </div>
+          <div className={styles.mapBar}>
+            <FilterOptions
+              filterField={filterField}
+              setFilterField={setFilterField}
+              filterOperator={filterOperator}
+              setFilterOperator={setFilterOperator}
+              filterValue={filterValue}
+              setFilterValue={setFilterValue}
+              setSelectedProject={setSelectedProject}
+            ></FilterOptions>
+            <button className={styles.addProjBtn} onClick={toggleModal}>
+              Add New Project
+            </button>
+          </div>
           <div className={styles.mapContainer}>
-            <div className={styles.mapBar}>
-              <FilterOptions
-                filterField={filterField}
-                setFilterField={setFilterField}
-                filterOperator={filterOperator}
-                setFilterOperator={setFilterOperator}
-                filterValue={filterValue}
-                setFilterValue={setFilterValue}
-                setSelectedProject={setSelectedProject}
-              ></FilterOptions>
-              <button className={styles.addProjBtn} onClick={toggleModal}>Add New Project</button>
-            </div>
-
             <MyMap
               projects={projects}
               selectedProject={selectedProject}

@@ -4,20 +4,33 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "header mapBar mapBar mapBar"
+    "projList map map map";
 }
 
-/* .mapContainer {
+/* grid areas */
+.projsHeader {
+  grid-area: header;
+  border: solid 2px black;
+}
 
-} */
+.mapContainer {
+  grid-area: map;
+  border: solid 2px black;
+}
 
 .mapBar {
+  grid-area: mapBar;
   display: flex;
   justify-content: space-between;
+  border: solid 2px black;
 }
 
 .projContainer {
+  grid-area: projList;
   max-width: 500px;
+  border: solid 2px black;
 }
 
 .projList {
