@@ -262,7 +262,7 @@ function App() {
                 setFilterValue={setFilterValue}
                 setSelectedProject={setSelectedProject}
               ></FilterOptions>
-              <button onClick={toggleModal}>Add New Project</button>
+              <button className={styles.addProjBtn} onClick={toggleModal}>Add New Project</button>
             </div>
 
             <MyMap

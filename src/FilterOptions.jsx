@@ -142,7 +142,7 @@ export default function FilterOptions({
         </div>
       </form>
       {/* clear filters button to reset filteredProjects to empty */}
-      <button type="button" onClick={clearFilters}>
+      <button className={styles.clearFiltersBtn} type="button" onClick={clearFilters}>
         Clear Filters
       </button>
     </div>
