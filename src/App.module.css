@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+}
+
+.mapContainer {
+  border: solid 5px blue;
+}
+
+.projContainer {
+  border: solid 3px green;
+}
+
+.projList {
+  list-style: none;
+}

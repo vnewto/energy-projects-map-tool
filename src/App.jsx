@@ -7,6 +7,8 @@ import Project from "./Project.jsx";
 import FilterOptions from "./FilterOptions.jsx";
 import UpdateProjectModal from "./UpdateProjectModal.jsx";
 
+import styles from "./App.module.css";
+
 // url and token for fetch request from airtable
 const token = `Bearer ${import.meta.env.VITE_PAT}`;
 const BASE_URL = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${
@@ -231,37 +233,43 @@ function App() {
       )}
       <div>
         <h1>Wind Farms Map Dashboard</h1>
-        <FilterOptions
-          filterField={filterField}
-          setFilterField={setFilterField}
-          filterOperator={filterOperator}
-          setFilterOperator={setFilterOperator}
-          filterValue={filterValue}
-          setFilterValue={setFilterValue}
-          setSelectedProject={setSelectedProject}
-        ></FilterOptions>
-        <button onClick={toggleModal}>Add New Project</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <MyMap
-          projects={projects}
-          selectedProject={selectedProject}
-          setSelectedProject={setSelectedProject}
-          handleClickProject={handleClickProject}
-        ></MyMap>
-        <div>
-          <h2>My Projects</h2>
-          <ul>
-            {projects.map((project) => (
-              <li key={project.id}>
-                <Project
-                  project={project}
-                  handleClickProject={handleClickProject}
-                  selectedProject={selectedProject}
-                  toggleUpdateModal={toggleUpdateModal}
-                ></Project>
-              </li>
-            ))}
-          </ul>
+
+        <div className={styles.container}>
+          <div className={styles.mapContainer}>
+            <FilterOptions
+              filterField={filterField}
+              setFilterField={setFilterField}
+              filterOperator={filterOperator}
+              setFilterOperator={setFilterOperator}
+              filterValue={filterValue}
+              setFilterValue={setFilterValue}
+              setSelectedProject={setSelectedProject}
+            ></FilterOptions>
+            <button onClick={toggleModal}>Add New Project</button>
+            <MyMap
+              projects={projects}
+              selectedProject={selectedProject}
+              setSelectedProject={setSelectedProject}
+              handleClickProject={handleClickProject}
+            ></MyMap>
+          </div>
+
+          <div className={styles.projContainer}>
+            <h2>My Projects</h2>
+            <ul className={styles.projList}>
+              {projects.map((project) => (
+                <li key={project.id}>
+                  <Project
+                    project={project}
+                    handleClickProject={handleClickProject}
+                    selectedProject={selectedProject}
+                    toggleUpdateModal={toggleUpdateModal}
+                  ></Project>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </>

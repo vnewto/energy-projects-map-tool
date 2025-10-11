@@ -36,7 +36,6 @@ export default function MyMap({
               ></MyAdvancedMarker>
             );
           })}
-          ;
           {selectedProject && (
             <MyInfoWindow project={selectedProject}></MyInfoWindow>
           )}
