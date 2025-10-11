@@ -214,15 +214,6 @@ function App() {
     }
   }
 
-  //UPDATE PROJECT FUNCTION
-  //payload with method Patch and pass in an updatedProject variable
-  //in fields, only send it if the field changed?
-  //reset the updated project to the project (using the spread operator) with the updated fields
-  //reset projects to the updated project added on
-  //set the updated project as the selectedProject
-
-  //also setError when doing fetch requests for update and delete functions
-
   return (
     <>
       {projectModal && (
