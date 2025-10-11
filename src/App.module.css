@@ -1,9 +1,15 @@
 .container {
   display: flex;
+  flex-direction: row-reverse;
 }
 
 .mapContainer {
   border: solid 5px blue;
+}
+
+.mapBar {
+  display: flex;
+  justify-content: space-between;
 }
 
 .projContainer {

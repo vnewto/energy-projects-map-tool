@@ -232,21 +232,24 @@ function App() {
         />
       )}
       <div>
-        <h1>Wind Farms Map Dashboard</h1>
+        <h1>Wind Energy Projects Map Dashboard</h1>
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <div className={styles.container}>
           <div className={styles.mapContainer}>
-            <FilterOptions
-              filterField={filterField}
-              setFilterField={setFilterField}
-              filterOperator={filterOperator}
-              setFilterOperator={setFilterOperator}
-              filterValue={filterValue}
-              setFilterValue={setFilterValue}
-              setSelectedProject={setSelectedProject}
-            ></FilterOptions>
-            <button onClick={toggleModal}>Add New Project</button>
+            <div className={styles.mapBar}>
+              <FilterOptions
+                filterField={filterField}
+                setFilterField={setFilterField}
+                filterOperator={filterOperator}
+                setFilterOperator={setFilterOperator}
+                filterValue={filterValue}
+                setFilterValue={setFilterValue}
+                setSelectedProject={setSelectedProject}
+              ></FilterOptions>
+              <button onClick={toggleModal}>Add New Project</button>
+            </div>
+
             <MyMap
               projects={projects}
               selectedProject={selectedProject}
