@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { useLocation, Routes, Route } from "react-router";
 import Header from "./shared/Header.jsx";
+import Footer from "./shared/Footer.jsx";
 import MapPage from "./pages/MapPage.jsx";
 import About from "./pages/About.jsx";
 import NotFound from "./pages/NotFound.jsx";
@@ -257,6 +258,7 @@ function App() {
           }
         ></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }
