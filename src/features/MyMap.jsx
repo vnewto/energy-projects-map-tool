@@ -7,7 +7,6 @@ export default function MyMap({
   selectedProject,
   handleClickProject,
 }) {
-
   const default_center = {
     location: {
       lat: 37.09024,
@@ -17,7 +16,7 @@ export default function MyMap({
   };
 
   return (
-    <div style={{ height: '700px', width: "100%" }}>
+    <div style={{ height: "700px", width: "100%" }}>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLEMAPS_API_KEY}>
         <Map
           defaultZoom={default_center.zoom}

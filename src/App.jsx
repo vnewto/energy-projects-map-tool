@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 
-import MyMap from "./MyMap.jsx";
-import AddProjectModal from "./AddProjectModal.jsx";
-import Project from "./Project.jsx";
-import FilterOptions from "./FilterOptions.jsx";
-import UpdateProjectModal from "./UpdateProjectModal.jsx";
+import MyMap from "./features/MyMap.jsx";
+import AddProjectModal from "./features/AddProjectModal.jsx";
+import Project from "./features/Project.jsx";
+import FilterOptions from "./features/FilterOptions.jsx";
+import UpdateProjectModal from "./features/UpdateProjectModal.jsx";
 
 import styles from "./App.module.css";
 
