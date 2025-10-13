@@ -11,16 +11,16 @@ export default function Project({
     <div onClick={() => handleClickProject(project)}>
       <div className={styles.projContainer}>
         <div>
-          <p>{project.proj_name}</p>
+          <p className={styles.projectName}>{project.proj_name}</p>
         </div>
         <div>
           {/* if project id matches the id of the selected project, then render buttons */}
           {selectedProject && selectedProject.id === project.id && (
             <div>
-              <button type="button" onClick={toggleUpdateModal}>
+              <button type="button" onClick={toggleUpdateModal} className={styles.editProjBtn}>
                 Edit
               </button>
-              <button type="button">Delete</button>
+              {/* <button type="button">Delete</button> */}
             </div>
           )}
         </div>

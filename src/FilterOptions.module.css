@@ -1,0 +1,24 @@
+.formContainer {
+    display: flex;
+}
+
+form {
+    display: flex;
+}
+
+option, select {
+    font-family: "Poppins", sans-serif;
+    padding: 0.2em;
+}
+
+.clearFiltersBtn {
+    font-family: "Poppins", sans-serif;
+    padding: 0.2em 1em;
+    border: none;
+    font-weight: 500;
+}
+
+.clearFiltersBtn:hover {
+    background-color: #60d98f;
+    transition-duration: 0.3s;
+}

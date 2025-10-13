@@ -231,32 +231,13 @@ function App() {
           selectedProject={selectedProject}
         />
       )}
+      <h1>Wind Energy Projects Map Dashboard</h1>
       <div>
-        <h1>Wind Farms Map Dashboard</h1>
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <div className={styles.container}>
-          <div className={styles.mapContainer}>
-            <FilterOptions
-              filterField={filterField}
-              setFilterField={setFilterField}
-              filterOperator={filterOperator}
-              setFilterOperator={setFilterOperator}
-              filterValue={filterValue}
-              setFilterValue={setFilterValue}
-              setSelectedProject={setSelectedProject}
-            ></FilterOptions>
-            <button onClick={toggleModal}>Add New Project</button>
-            <MyMap
-              projects={projects}
-              selectedProject={selectedProject}
-              setSelectedProject={setSelectedProject}
-              handleClickProject={handleClickProject}
-            ></MyMap>
-          </div>
-
+          <h2 className={styles.projsHeader}>My Projects</h2>
           <div className={styles.projContainer}>
-            <h2>My Projects</h2>
             <ul className={styles.projList}>
               {projects.map((project) => (
                 <li key={project.id}>
@@ -269,6 +250,28 @@ function App() {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className={styles.mapBar}>
+            <FilterOptions
+              filterField={filterField}
+              setFilterField={setFilterField}
+              filterOperator={filterOperator}
+              setFilterOperator={setFilterOperator}
+              filterValue={filterValue}
+              setFilterValue={setFilterValue}
+              setSelectedProject={setSelectedProject}
+            ></FilterOptions>
+            <button className={styles.addProjBtn} onClick={toggleModal}>
+              Add New Project
+            </button>
+          </div>
+          <div className={styles.mapContainer}>
+            <MyMap
+              projects={projects}
+              selectedProject={selectedProject}
+              setSelectedProject={setSelectedProject}
+              handleClickProject={handleClickProject}
+            ></MyMap>
           </div>
         </div>
       </div>

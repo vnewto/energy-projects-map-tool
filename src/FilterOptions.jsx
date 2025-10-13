@@ -1,3 +1,5 @@
+import styles from './FilterOptions.module.css';
+
 export default function FilterOptions({
   setFilterField,
   setFilterValue,
@@ -45,7 +47,7 @@ export default function FilterOptions({
   console.log("filterValue: ", filterValue);
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       {/* form with two select inputs, one for field and one for value */}
       <form>
         {/* Select Field Input */}
@@ -140,7 +142,7 @@ export default function FilterOptions({
         </div>
       </form>
       {/* clear filters button to reset filteredProjects to empty */}
-      <button type="button" onClick={clearFilters}>
+      <button className={styles.clearFiltersBtn} type="button" onClick={clearFilters}>
         Clear Filters
       </button>
     </div>

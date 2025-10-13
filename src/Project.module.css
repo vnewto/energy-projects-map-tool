@@ -1,5 +1,29 @@
 .projContainer {
   display: flex;
-  border: solid red 2px;
   justify-content: space-between;
+  background-color: hsl(143, 61%, 61%, 0.4);
+  margin: 0 0 0.75em 0;
+  padding: 0.75em;
+  border-radius: 6px;
+}
+
+.projContainer:hover {
+  background-color: hsl(143, 61%, 61%);
+}
+
+.projectName {
+  margin: 0;
+}
+
+.editProjBtn {
+  background-color: rgb(49, 95, 105);
+  color: white;
+  border: none;
+  padding: 0.3em 1em;
+  font-family: "Poppins", sans-serif;
+  border-radius: 4px;
+}
+
+.editProjBtn:hover {
+  background-color: rgba(49, 95, 105, 0.8);
 }

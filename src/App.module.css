@@ -1,15 +1,66 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2 {
+  font-family: "Courgette", cursive;
+}
+
+h2 {
+  margin: 0;
+  text-align: center;
+}
+
 .container {
-  display: flex;
+  display: grid;
+  grid-template-areas:
+    "mapBar mapBar mapBar header"
+    "map map map projList";
+  gap: 1em;
+}
+
+/* grid areas */
+.projsHeader {
+  grid-area: header;
+  /* border: solid 2px black; */
 }
 
 .mapContainer {
-  border: solid 5px blue;
+  grid-area: map;
+  /* border: solid 2px black; */
+}
+
+.mapBar {
+  grid-area: mapBar;
+  display: flex;
+  justify-content: space-between;
+  /* border: solid 2px black; */
 }
 
 .projContainer {
-  border: solid 3px green;
+  grid-area: projList;
+  max-width: 500px;
+  /* border: solid 2px black; */
 }
 
 .projList {
   list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addProjBtn {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  border: none;
+  background: #0f9d58;
+  color: white;
+  padding: 0.3em 1.5em;
+  border-radius: 8px;
+}
+
+.addProjBtn:hover {
+  background: #60d98f;
+  transition-duration: 0.3s;
 }
