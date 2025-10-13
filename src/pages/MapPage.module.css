@@ -1,3 +1,9 @@
+h2 {
+  font-family: "Courgette", cursive;
+  margin: 0;
+  text-align: center;
+}
+
 .container {
   display: grid;
   grid-template-areas:

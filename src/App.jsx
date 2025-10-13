@@ -1,14 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 
-import MyMap from "./features/MyMap.jsx";
-import AddProjectModal from "./features/AddProjectModal.jsx";
-import Project from "./features/Project.jsx";
-import FilterOptions from "./features/FilterOptions.jsx";
-import UpdateProjectModal from "./features/UpdateProjectModal.jsx";
+import Header from "./shared/Header.jsx";
 import MapPage from "./pages/MapPage.jsx";
-
-import styles from "./App.module.css";
 
 // url and token for fetch request from airtable
 const token = `Bearer ${import.meta.env.VITE_PAT}`;
@@ -219,7 +213,8 @@ function App() {
 
   return (
     <>
-      <h1>Wind Energy Projects Map Dashboard</h1>
+      {/* <h1>Wind Energy Projects Map Dashboard</h1> */}
+      <Header title='temp title'></Header>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <MapPage
         projectModal={projectModal}
