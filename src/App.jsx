@@ -231,8 +231,8 @@ function App() {
           selectedProject={selectedProject}
         />
       )}
+      <h1>Wind Energy Projects Map Dashboard</h1>
       <div>
-        <h1>Wind Energy Projects Map Dashboard</h1>
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <div className={styles.container}>

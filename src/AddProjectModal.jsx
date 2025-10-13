@@ -38,10 +38,10 @@ export default function AddProjectModal({ toggleModal, addNewProject }) {
   return (
     <>
       <div className={styles.modal}>
-        <div className={styles.overlay}>
-          <div className={styles.modalContent}>
+        <div className={styles.overlay} onClick={toggleModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <h1>Add a New Project</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={styles.projForm}>
               <label htmlFor="proj_name">Project Name</label>
               <input
                 type="text"

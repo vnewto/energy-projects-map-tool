@@ -2,40 +2,52 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+h1,
+h2 {
+  font-family: "Courgette", cursive;
+}
+
+h2 {
+  margin: 0;
+  text-align: center;
+}
+
 .container {
   display: grid;
   grid-template-areas:
-    "header mapBar mapBar mapBar"
-    "projList map map map";
+    "mapBar mapBar mapBar header"
+    "map map map projList";
+  gap: 1em;
 }
 
 /* grid areas */
 .projsHeader {
   grid-area: header;
-  border: solid 2px black;
+  /* border: solid 2px black; */
 }
 
 .mapContainer {
   grid-area: map;
-  border: solid 2px black;
+  /* border: solid 2px black; */
 }
 
 .mapBar {
   grid-area: mapBar;
   display: flex;
   justify-content: space-between;
-  border: solid 2px black;
+  /* border: solid 2px black; */
 }
 
 .projContainer {
   grid-area: projList;
   max-width: 500px;
-  border: solid 2px black;
+  /* border: solid 2px black; */
 }
 
 .projList {
   list-style: none;
-  padding: 0.5em;
+  padding: 0;
+  margin: 0;
 }
 
 .addProjBtn {
