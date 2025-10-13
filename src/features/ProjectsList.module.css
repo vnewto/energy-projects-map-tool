@@ -1,0 +1,11 @@
+.projContainer {
+  grid-area: projList;
+  max-width: 500px;
+  /* border: solid 2px black; */
+}
+
+.projList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

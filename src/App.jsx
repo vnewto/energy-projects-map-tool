@@ -43,9 +43,18 @@ function parseData(data) {
 function App() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [projectModal, setProjectModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  //variables for setting up pagination of projects list
+  const [currentPage, setCurrentPage] = useState(1);
+  const [projsPerPage, setProjsPerPage] = useState(11);
+
+  //variables for showing the addproject and updateproject modals
+  const [projectModal, setProjectModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+
+  //variable to set the title of different pages
   const [title, setTitle] = useState("");
 
   //define state variables for filtering projects list
@@ -85,6 +94,7 @@ function App() {
         method: "GET",
         headers: { Authorization: token },
       };
+      setLoading(true);
       try {
         const resp = await fetch(url, options);
         if (!resp.ok) {
@@ -100,6 +110,7 @@ function App() {
         console.log("parsedProjects: ", parsedProjects);
 
         setProjects(parsedProjects);
+        setLoading(false);
       } catch (error) {
         setError(error.message);
         console.error("Fetch error: ", error);
@@ -238,6 +249,7 @@ function App() {
           path="/"
           element={
             <MapPage
+              loading={loading}
               projectModal={projectModal}
               toggleModal={toggleModal}
               addNewProject={addNewProject}
@@ -254,6 +266,9 @@ function App() {
               setFilterValue={setFilterValue}
               projects={projects}
               handleClickProject={handleClickProject}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              projsPerPage={projsPerPage}
             />
           }
         ></Route>
