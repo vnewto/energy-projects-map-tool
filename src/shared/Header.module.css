@@ -1,0 +1,22 @@
+h1 {
+  font-family: "Courgette", cursive;
+  /* border: solid black 2px; */
+  margin-top: 0;
+}
+
+nav {
+  font-family: "Poppins", sans-serif;
+  text-align: end;
+  /* border: solid black 2px; */
+}
+
+.navLink {
+  margin-left: 1.5em;
+  text-decoration: none;
+  color: black;
+  /* border: solid red 2px; */
+}
+
+.active {
+  color: rgb(49, 95, 105);
+}

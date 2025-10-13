@@ -1,3 +1,7 @@
+li {
+  font-family: "Poppins", sans-serif;
+}
+
 .projContainer {
   display: flex;
   justify-content: space-between;

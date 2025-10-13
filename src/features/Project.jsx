@@ -17,7 +17,11 @@ export default function Project({
           {/* if project id matches the id of the selected project, then render buttons */}
           {selectedProject && selectedProject.id === project.id && (
             <div>
-              <button type="button" onClick={toggleUpdateModal} className={styles.editProjBtn}>
+              <button
+                type="button"
+                onClick={toggleUpdateModal}
+                className={styles.editProjBtn}
+              >
                 Edit
               </button>
               {/* <button type="button">Delete</button> */}

@@ -1,13 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
-
-import MyMap from "./MyMap.jsx";
-import AddProjectModal from "./AddProjectModal.jsx";
-import Project from "./Project.jsx";
-import FilterOptions from "./FilterOptions.jsx";
-import UpdateProjectModal from "./UpdateProjectModal.jsx";
-
-import styles from "./App.module.css";
+import { useLocation, Routes, Route } from "react-router";
+import Header from "./shared/Header.jsx";
+import Footer from "./shared/Footer.jsx";
+import MapPage from "./pages/MapPage.jsx";
+import About from "./pages/About.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 // url and token for fetch request from airtable
 const token = `Bearer ${import.meta.env.VITE_PAT}`;
@@ -48,11 +46,24 @@ function App() {
   const [projectModal, setProjectModal] = useState(false);
   const [error, setError] = useState("");
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [title, setTitle] = useState("");
 
   //define state variables for filtering projects list
   const [filterField, setFilterField] = useState("");
   const [filterValue, setFilterValue] = useState("");
   const [filterOperator, setFilterOperator] = useState("");
+
+  //useLocation from react router for nav links
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setTitle("Wind Energy Projects Map Dashboard");
+    } else if (location.pathname === "/about") {
+      setTitle("About");
+    } else {
+      setTitle("Not Found");
+    }
+  }, [location]);
 
   useEffect(() => {
     let url = "";
@@ -217,65 +228,38 @@ function App() {
   }
 
   return (
-    <>
-      {projectModal && (
-        <AddProjectModal
-          toggleModal={toggleModal}
-          addNewProject={addNewProject}
-        />
-      )}
-      {showUpdateModal && (
-        <UpdateProjectModal
-          toggleUpdateModal={toggleUpdateModal}
-          updateProject={updateProject}
-          selectedProject={selectedProject}
-        />
-      )}
-      <h1>Wind Energy Projects Map Dashboard</h1>
-      <div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <div className={styles.container}>
-          <h2 className={styles.projsHeader}>My Projects</h2>
-          <div className={styles.projContainer}>
-            <ul className={styles.projList}>
-              {projects.map((project) => (
-                <li key={project.id}>
-                  <Project
-                    project={project}
-                    handleClickProject={handleClickProject}
-                    selectedProject={selectedProject}
-                    toggleUpdateModal={toggleUpdateModal}
-                  ></Project>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={styles.mapBar}>
-            <FilterOptions
+    <div>
+      <Header title={title}></Header>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <Routes>
+        <Route path="/about" element={<About />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
+        <Route
+          path="/"
+          element={
+            <MapPage
+              projectModal={projectModal}
+              toggleModal={toggleModal}
+              addNewProject={addNewProject}
+              toggleUpdateModal={toggleUpdateModal}
+              updateProject={updateProject}
+              selectedProject={selectedProject}
+              setSelectedProject={setSelectedProject}
+              showUpdateModal={showUpdateModal}
               filterField={filterField}
               setFilterField={setFilterField}
               filterOperator={filterOperator}
               setFilterOperator={setFilterOperator}
               filterValue={filterValue}
               setFilterValue={setFilterValue}
-              setSelectedProject={setSelectedProject}
-            ></FilterOptions>
-            <button className={styles.addProjBtn} onClick={toggleModal}>
-              Add New Project
-            </button>
-          </div>
-          <div className={styles.mapContainer}>
-            <MyMap
               projects={projects}
-              selectedProject={selectedProject}
-              setSelectedProject={setSelectedProject}
               handleClickProject={handleClickProject}
-            ></MyMap>
-          </div>
-        </div>
-      </div>
-    </>
+            />
+          }
+        ></Route>
+      </Routes>
+      <Footer></Footer>
+    </div>
   );
 }
 
