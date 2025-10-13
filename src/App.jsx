@@ -6,6 +6,7 @@ import AddProjectModal from "./features/AddProjectModal.jsx";
 import Project from "./features/Project.jsx";
 import FilterOptions from "./features/FilterOptions.jsx";
 import UpdateProjectModal from "./features/UpdateProjectModal.jsx";
+import MapPage from "./pages/MapPage.jsx";
 
 import styles from "./App.module.css";
 
@@ -218,63 +219,26 @@ function App() {
 
   return (
     <>
-      {projectModal && (
-        <AddProjectModal
-          toggleModal={toggleModal}
-          addNewProject={addNewProject}
-        />
-      )}
-      {showUpdateModal && (
-        <UpdateProjectModal
-          toggleUpdateModal={toggleUpdateModal}
-          updateProject={updateProject}
-          selectedProject={selectedProject}
-        />
-      )}
       <h1>Wind Energy Projects Map Dashboard</h1>
-      <div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <div className={styles.container}>
-          <h2 className={styles.projsHeader}>My Projects</h2>
-          <div className={styles.projContainer}>
-            <ul className={styles.projList}>
-              {projects.map((project) => (
-                <li key={project.id}>
-                  <Project
-                    project={project}
-                    handleClickProject={handleClickProject}
-                    selectedProject={selectedProject}
-                    toggleUpdateModal={toggleUpdateModal}
-                  ></Project>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={styles.mapBar}>
-            <FilterOptions
-              filterField={filterField}
-              setFilterField={setFilterField}
-              filterOperator={filterOperator}
-              setFilterOperator={setFilterOperator}
-              filterValue={filterValue}
-              setFilterValue={setFilterValue}
-              setSelectedProject={setSelectedProject}
-            ></FilterOptions>
-            <button className={styles.addProjBtn} onClick={toggleModal}>
-              Add New Project
-            </button>
-          </div>
-          <div className={styles.mapContainer}>
-            <MyMap
-              projects={projects}
-              selectedProject={selectedProject}
-              setSelectedProject={setSelectedProject}
-              handleClickProject={handleClickProject}
-            ></MyMap>
-          </div>
-        </div>
-      </div>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <MapPage
+        projectModal={projectModal}
+        toggleModal={toggleModal}
+        addNewProject={addNewProject}
+        toggleUpdateModal={toggleUpdateModal}
+        updateProject={updateProject}
+        selectedProject={selectedProject}
+        setSelectedProject={setSelectedProject}
+        showUpdateModal={showUpdateModal}
+        filterField={filterField}
+        setFilterField={setFilterField}
+        filterOperator={filterOperator}
+        setFilterOperator={setFilterOperator}
+        filterValue={filterValue}
+        setFilterValue={setFilterValue}
+        projects={projects}
+        handleClickProject={handleClickProject}
+      ></MapPage>
     </>
   );
 }
