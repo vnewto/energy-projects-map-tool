@@ -1,4 +1,4 @@
-import styles from './FilterOptions.module.css';
+import styles from "./FilterOptions.module.css";
 
 export default function FilterOptions({
   setFilterField,
@@ -142,7 +142,11 @@ export default function FilterOptions({
         </div>
       </form>
       {/* clear filters button to reset filteredProjects to empty */}
-      <button className={styles.clearFiltersBtn} type="button" onClick={clearFilters}>
+      <button
+        className={styles.clearFiltersBtn}
+        type="button"
+        onClick={clearFilters}
+      >
         Clear Filters
       </button>
     </div>
