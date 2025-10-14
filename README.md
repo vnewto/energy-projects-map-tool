@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is written using React in Vite. It is a map dashboard app with Google Maps integration that allows a user to add and update items from a projects list. Each project has a latitude and longitude coordinate and gets displayed as a marker on the map. The markers are interactive with a pop-up info window when clicked on. A form with filter options allows the user to change which projects are displayed.
+This project is written using React in [Vite](https://vite.dev/). It is a map dashboard app with Google Maps integration that allows a user to add and update items from a projects list. Each project has a latitude and longitude coordinate and gets displayed as a marker on the map. The markers are interactive with a pop-up info window when clicked on. A form with filter options allows the user to change which projects are displayed.
 
 The project uses a fake dataset generated mainly with [Mockaroo](https://www.mockaroo.com/).
 
@@ -37,7 +37,7 @@ This project also incorporates [Google Fonts](https://fonts.google.com/) in for 
    `npm run dev`
    Your terminal will show you a link:
 
-![Live server link](/public/images/local_host_link.jpg)
+![Live server link](public/Dev_Server_Link.jpg)
 
 Click on the localhost link to view the live server.
 
