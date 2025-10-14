@@ -75,7 +75,7 @@ export default function MapPage({
           {/* Projects List Header */}
           <h2 className={styles.projsHeader}>My Projects</h2>
           {/* List of Projects with Pagination component */}
-          <div>
+          <div className={styles.projList}>
             <ProjectsList
               projects={projects}
               handleClickProject={handleClickProject}

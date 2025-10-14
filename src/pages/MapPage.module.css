@@ -12,27 +12,28 @@ h3,
 .container {
   display: grid;
   grid-template-areas:
-    "mapBar mapBar mapBar header"
-    "map map map projList";
+    "mapBar header"
+    "map projList";
   gap: 1em;
 }
 
 /* grid areas */
 .projsHeader {
   grid-area: header;
-  /* border: solid 2px black; */
 }
 
 .mapContainer {
   grid-area: map;
-  /* border: solid 2px black; */
 }
 
 .mapBar {
   grid-area: mapBar;
   display: flex;
   justify-content: space-between;
-  /* border: solid 2px black; */
+}
+
+.projList {
+  grid-area: projList;
 }
 
 .addProjBtn {

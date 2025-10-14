@@ -36,7 +36,7 @@ export default function ProjectsList({
         <p>No projects selected</p>
       ) : (
         <div className={styles.projContainer}>
-          <ul className={styles.projList}>
+          <ul className={styles.projectList}>
             {projsOnCurrentPage.map((project) => (
               <li key={project.id}>
                 <Project
@@ -48,11 +48,12 @@ export default function ProjectsList({
               </li>
             ))}
           </ul>
-          <div>
-            <button
+          <div className={styles.paginationContainer}>
+            <button 
               type="button"
               onClick={handlePreviousPage}
               disabled={currentPage === 1}
+              className={styles.paginationBtn}
             >
               Prev
             </button>
@@ -63,6 +64,7 @@ export default function ProjectsList({
               type="button"
               onClick={handleNextPage}
               disabled={currentPage === totalPages}
+              className={styles.paginationBtn}
             >
               Next
             </button>

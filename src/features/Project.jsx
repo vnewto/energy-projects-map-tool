@@ -9,7 +9,7 @@ export default function Project({
 }) {
   return (
     <div onClick={() => handleClickProject(project)}>
-      <div className={styles.projContainer}>
+      <div className={(selectedProject && selectedProject.id === project.id) ? `${styles.isSelected} ${styles.projContainer}` : `${styles.projContainer}`}>
         <div>
           <p className={styles.projectName}>{project.proj_name}</p>
         </div>

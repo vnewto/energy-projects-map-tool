@@ -31,3 +31,7 @@ li {
 .editProjBtn:hover {
   background-color: rgba(49, 95, 105, 0.8);
 }
+
+.isSelected {
+  background-color: hsl(143, 61%, 61%);
+}
