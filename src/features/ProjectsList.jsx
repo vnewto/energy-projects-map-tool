@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Project from "./Project";
 import styles from "./ProjectsList.module.css";
 
@@ -6,14 +7,15 @@ export default function ProjectsList({
   handleClickProject,
   selectedProject,
   toggleUpdateModal,
-  currentPage,
-  setCurrentPage,
-  projsPerPage,
 }) {
+//variables for setting up pagination of projects list
+  const [currentPage, setCurrentPage] = useState(1);
+  const projsPerPage = 11;
+
   //pagination logic
   const indexOfLastProj = currentPage * projsPerPage;
   const indexOfFirstProj = indexOfLastProj - projsPerPage;
-  const currentProjs = projects.slice(indexOfFirstProj, indexOfLastProj);
+  const projsOnCurrentPage = projects.slice(indexOfFirstProj, indexOfLastProj);
   const totalPages = Math.ceil(projects.length / projsPerPage);
 
   function handlePreviousPage() {
@@ -30,12 +32,12 @@ export default function ProjectsList({
 
   return (
     <div>
-      {currentProjs === 0 ? (
-        <p>Add a project above to get started</p>
+      {projects === 0 ? (
+        <p>No projects selected</p>
       ) : (
         <div className={styles.projContainer}>
           <ul className={styles.projList}>
-            {currentProjs.map((project) => (
+            {projsOnCurrentPage.map((project) => (
               <li key={project.id}>
                 <Project
                   project={project}

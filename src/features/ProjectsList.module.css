@@ -1,7 +1,10 @@
 .projContainer {
   grid-area: projList;
   max-width: 500px;
-  /* border: solid 2px black; */
+  border: solid 2px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .projList {

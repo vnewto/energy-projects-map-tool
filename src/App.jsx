@@ -46,10 +46,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  //variables for setting up pagination of projects list
-  const [currentPage, setCurrentPage] = useState(1);
-  const [projsPerPage, setProjsPerPage] = useState(11);
-
   //variables for showing the addproject and updateproject modals
   const [projectModal, setProjectModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -117,7 +113,7 @@ function App() {
       }
     };
     fetchMapData();
-  }, [token, filterField, filterValue, filterOperator]);
+  }, [filterField, filterValue, filterOperator]);
 
   //function to set the selected project when it's clicked on either as an AdvancedMarker or as a Project in the Projects list
   const handleClickProject = useCallback(
@@ -266,9 +262,6 @@ function App() {
               setFilterValue={setFilterValue}
               projects={projects}
               handleClickProject={handleClickProject}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              projsPerPage={projsPerPage}
             />
           }
         ></Route>

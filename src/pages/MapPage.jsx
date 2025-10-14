@@ -23,9 +23,6 @@ export default function MapPage({
   setFilterValue,
   setSelectedProject,
   loading,
-  currentPage,
-  setCurrentPage,
-  projsPerPage,
 }) {
   if (loading) {
     return <h3>Loading...</h3>;
@@ -84,9 +81,6 @@ export default function MapPage({
               handleClickProject={handleClickProject}
               selectedProject={selectedProject}
               toggleUpdateModal={toggleUpdateModal}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              projsPerPage={projsPerPage}
             ></ProjectsList>
           </div>
         </div>
