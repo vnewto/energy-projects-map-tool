@@ -32,6 +32,7 @@
 
 .paginationBtn:hover {
   background-color: #60d98f;
+  transition-duration: 0.3s;
 }
 
 .paginationBtn:disabled:hover {

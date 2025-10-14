@@ -20,7 +20,7 @@ export default function Header({ title }) {
           About
         </NavLink>
       </nav>
-      <h1>{title}</h1>
+      <h1 className={styles.pageHeader}>{title}</h1>
     </>
   );
 }

@@ -13,6 +13,7 @@ li {
 
 .projContainer:hover {
   background-color: hsl(143, 61%, 61%);
+  transition-duration: 0.5s;
 }
 
 .projectName {

@@ -1,0 +1,10 @@
+.aboutContainer {
+  font-family: "Poppins", sans-serif;
+  max-width: 500px;
+  border: solid 2px purple;
+  margin: 0 auto;
+}
+
+.linkToHome {
+    border: solid red 2px;
+}
