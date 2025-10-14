@@ -9,13 +9,13 @@ The project uses a fake dataset generated mainly with [Mockaroo](https://www.moc
 ## Preview
 
 Without filters applied:
-![Map dashboard home page](public\Map_Dashboard_Home.jpg)
+![Map dashboard home page](public/Map_Dashboard_Home.jpg)
 
 With Filters Applied:
-![Map dashboard with filters applied](public\Map_Dashboard_With_Filters.jpg)
+![Map dashboard with filters applied](public/Map_Dashboard_With_Filters.jpg)
 
 Click on a project under 'My Projects' to edit it:
-![Edit Project Modal](public\Map_Dashboard_Edit_Modal.jpg)
+![Edit Project Modal](public/Map_Dashboard_Edit_Modal.jpg)
 
 ## Technologies Used
 
