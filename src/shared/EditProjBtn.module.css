@@ -1,0 +1,12 @@
+.editProjBtn {
+  background-color: rgb(49, 95, 105);
+  color: white;
+  border: none;
+  padding: 0.3em 1em;
+  font-family: "Poppins", sans-serif;
+  border-radius: 4px;
+}
+
+.editProjBtn:hover {
+  background-color: rgba(49, 95, 105, 0.8);
+}

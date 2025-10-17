@@ -43,7 +43,7 @@ export default function ProjectsList({
                   project={project}
                   handleClickProject={handleClickProject}
                   selectedProject={selectedProject}
-                  toggleUpdateModal={toggleShowUpdateModal}
+                  toggleShowUpdateModal={toggleShowUpdateModal}
                 ></Project>
               </li>
             ))}

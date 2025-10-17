@@ -21,6 +21,7 @@ p {
 /* grid areas */
 .projsHeader {
   grid-area: header;
+  text-align: center;
 }
 
 .mapContainer {
@@ -45,6 +46,7 @@ p {
   color: white;
   padding: 0.3em 1.5em;
   border-radius: 8px;
+  justify-items: center;
 }
 
 .addProjBtn:hover {

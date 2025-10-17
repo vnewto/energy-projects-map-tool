@@ -7,6 +7,7 @@ export default function MyMap({
   selectedProject,
   setSelectedProject,
   handleClickProject,
+  toggleShowUpdateModal,
 }) {
   const default_center = {
     location: {
@@ -41,6 +42,7 @@ export default function MyMap({
               project={selectedProject}
               setSelectedProject={setSelectedProject}
               key={selectedProject.name}
+              toggleShowUpdateModal={toggleShowUpdateModal}
             ></MyInfoWindow>
           )}
         </Map>

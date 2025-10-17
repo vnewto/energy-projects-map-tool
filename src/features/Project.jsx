@@ -1,11 +1,11 @@
+import EditProjBtn from "../shared/EditProjBtn";
 import styles from "./Project.module.css";
-import UpdateProjectModal from "./UpdateProjectModal";
 
 export default function Project({
   project,
   handleClickProject,
   selectedProject,
-  toggleUpdateModal,
+  toggleShowUpdateModal,
 }) {
   return (
     <div onClick={() => handleClickProject(project)}>
@@ -17,14 +17,7 @@ export default function Project({
           {/* if project id matches the id of the selected project, then render buttons */}
           {selectedProject && selectedProject.id === project.id && (
             <div>
-              <button
-                type="button"
-                onClick={toggleUpdateModal}
-                className={styles.editProjBtn}
-              >
-                Edit
-              </button>
-              {/* <button type="button">Delete</button> */}
+              <EditProjBtn toggleShowUpdateModal={toggleShowUpdateModal} />
             </div>
           )}
         </div>
