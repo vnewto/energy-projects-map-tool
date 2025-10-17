@@ -19,7 +19,7 @@
 }
 
 .paginationBtn,
-.projContainer, 
+.projContainer,
 input {
   font-family: "Poppins", sans-serif;
 }
@@ -32,7 +32,7 @@ input {
 }
 
 .paginationBtn:hover {
-  background-color: #60d98f;
+  background-color: rgb(167, 167, 167);
   transition-duration: 0.3s;
 }
 

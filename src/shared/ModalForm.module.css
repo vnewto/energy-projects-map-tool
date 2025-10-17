@@ -1,0 +1,27 @@
+.btnContainer {
+  display: flex;
+  justify-content: right;
+}
+
+.btn {
+  background-color: #0f9d58;
+  color: white;
+  border: none;
+  padding: 0.3em 1em;
+  font-family: "Poppins", sans-serif;
+  border-radius: 4px;
+  margin: 0.3em 0.5em;
+}
+
+.cancelBtn {
+  background-color: rgb(224, 224, 224);
+  color: black;
+}
+
+.cancelBtn:hover {
+  background-color: rgb(167, 167, 167);
+}
+
+.updateBtn:hover {
+  background-color: #44c788;
+}

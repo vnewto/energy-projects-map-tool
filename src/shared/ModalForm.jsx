@@ -1,3 +1,5 @@
+import styles from "./ModalForm.module.css";
+
 export default function ModalForm({
   onSubmitFunction,
   className,
@@ -17,7 +19,8 @@ export default function ModalForm({
   setUtility,
   toggleModal,
   showAddModal,
-  showUpdateModal
+  showUpdateModal,
+  btnText,
 }) {
   return (
     <>
@@ -123,9 +126,14 @@ export default function ModalForm({
           onChange={(e) => setLead(e.target.value)}
         ></input>
         <br />
-
-        <button onClick={toggleModal}>Cancel</button>
-        <button type="submit">Update</button>
+        <div className={styles.btnContainer}>
+          <button className={`${styles.btn} ${styles.cancelBtn}`} onClick={toggleModal}>
+            Cancel
+          </button>
+          <button className={`${styles.btn} ${styles.updateBtn}`} type="submit">
+            {btnText}
+          </button>
+        </div>
       </form>
     </>
   );

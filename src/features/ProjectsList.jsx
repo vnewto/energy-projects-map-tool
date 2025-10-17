@@ -1,6 +1,9 @@
 import { useState } from "react";
 import Project from "./Project";
 import styles from "./ProjectsList.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBackward, faForward } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function ProjectsList({
   projects,
@@ -55,7 +58,7 @@ export default function ProjectsList({
               disabled={(currentPage === 1) || (currentPage === 0)}
               className={styles.paginationBtn}
             >
-              Prev
+              <FontAwesomeIcon icon={faBackward} /> Prev
             </button>
             <span>
               Page {currentPage} of {totalPages}
@@ -66,7 +69,7 @@ export default function ProjectsList({
               disabled={currentPage === totalPages}
               className={styles.paginationBtn}
             >
-              Next
+              Next <FontAwesomeIcon icon={faForward} />
             </button>
           </div>
         </div>
