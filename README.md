@@ -21,9 +21,12 @@ Click on a project under 'My Projects' to edit it:
 
 - [React](https://react.dev/) single page application
 - Routing done using [React Router](https://reactrouter.com/)
-- [Airtable](https://airtable.com/) database used for data management (API Key required)
-- Map built with [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/overview). A Google Cloud account is required to get an API key.
+- [Airtable](https://airtable.com/) database used for data management
+- Map built with [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/overview)
 - [ESLint](https://eslint.org/) used for code analysis
+
+An API key is required for using Airtable. It is free to set up an Airtable account.
+An API key is also required for using Google Maps. A Google Cloud account is required and is free to set up.
 
 This project also incorporates [Google Fonts](https://fonts.google.com/) in for styling purposes.
 
@@ -41,7 +44,21 @@ This project also incorporates [Google Fonts](https://fonts.google.com/) in for 
 
 Click on the localhost link to view the live server.
 
-## Additional Features
+## Features
+
+Users can:
+
+- Filter their displayed projects and clear the filters when desired
+- Add new projects
+- Edit existing projects.
+- Select a single project to view more information about it
+
+## Potential Future Features
+
+- Sort options for project list
+- Free-text search option
+- Option to delete a project
+- Syncing of the project list pagination to the selected project
 
 ## Troubleshooting
 
@@ -55,4 +72,4 @@ Valerie Newton
 
 ## Acknowledgements
 
-This project is part of my classwork in the Python class through [Code the Dream](https://codethedream.org/). Thank you to all the wonderful mentors and volunteers who put this program together and helped me through it.
+This project is part of my classwork in the Python class through [Code the Dream](https://codethedream.org/). Thank you to all the wonderful mentors and volunteers who put this program together and helped me through it. A special shout-out to [Rio Edwards](https://www.linkedin.com/in/rio-edwards/) for his mentoring and support.

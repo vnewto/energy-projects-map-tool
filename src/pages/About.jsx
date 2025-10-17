@@ -4,20 +4,21 @@ export default function About() {
   return (
     <div className={styles.aboutContainer}>
       <p>
-        This map dashboard is meant to simulate the experience of an employee at
-        a company that has location-based projects. Some examples could include
+        This map dashboard is intended to be used by any individual or company
+        that manages location-based projects. Some examples could include
         warehouses, retail sites, or medical practices. This particular
         prototype uses wind farms as an example. The dataset is fake and was
         generated using <a href="https://www.mockaroo.com/">Mockaroo</a>.
       </p>
       <p>
         The code is written using <a href="https://react.dev/">React</a> in{" "}
-        <a href="https://vite.dev/">Vite</a>. It is a map dashboard app with
-        Google Maps integration that allows a user to add and update items from
-        the projects list. Each project has a latitude and longitude coordinate
-        and gets displayed as a marker on the map. The markers are interactive
-        with a pop-up info window when clicked on. A form with filter options
-        allows the user to change which projects are displayed.{" "}
+        <a href="https://vite.dev/">Vite</a>. The app integrates Google Maps
+        which allows a user to view the location of each of their projects. Each
+        project has a latitude and longitude coordinate and gets displayed as a
+        marker on the map. The markers are interactive with a pop-up info window
+        when clicked on. A form with filter options allows the user to change
+        which projects are displayed. A user can also update their existing
+        projects or add completely new ones to the dataset.{" "}
       </p>
       <br />
       <div className={styles.linkContainer}>
