@@ -1,8 +1,11 @@
 import { InfoWindow } from "@vis.gl/react-google-maps";
 
-export default function MyInfoWindow({ project }) {
+export default function MyInfoWindow({ project, setSelectedProject }) {
   return (
-    <InfoWindow position={project.location}>
+    <InfoWindow
+      position={project.location}
+      onClose={() => setSelectedProject("")}
+    >
       <h1>{project.proj_name}</h1>
       <p>
         <span>System Size: </span>

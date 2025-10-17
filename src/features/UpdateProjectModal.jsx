@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styles from "./ProjectModal.module.css";
+import ModalForm from "../shared/ModalForm";
 
 export default function UpdateProjectModal({
-  toggleUpdateModal,
+  toggleShowUpdateModal,
+  showUpdateModal,
   updateProject,
   selectedProject,
 }) {
@@ -35,101 +37,38 @@ export default function UpdateProjectModal({
 
     updateProject(updatedProject);
     console.log("updatedProject: ", updatedProject);
-    toggleUpdateModal();
+    toggleShowUpdateModal();
   };
+
 
   return (
     <div className={styles.modal}>
-      <div className={styles.overlay} onClick={toggleUpdateModal}>
+      <div className={styles.overlay} onClick={toggleShowUpdateModal}>
         <div
           className={styles.modalContent}
           onClick={(e) => e.stopPropagation()}
         >
-          <h1>Edit Project</h1>
-          <form onSubmit={handleSubmit} className={styles.projForm}>
-            <label htmlFor="proj_name">Project Name</label>
-            <input
-              type="text"
-              name="proj_name"
-              id="proj_name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></input>
-            <label htmlFor="lat">Latitude</label>
-            <input
-              type="number"
-              name="lat"
-              id="lat"
-              required
-              inputMode="decimal"
-              pattern="[0-9]*[.,]?[0-9]*"
-              value={lat}
-              onChange={(e) => setLat(e.target.value)}
-            ></input>
-            <br />
-            <label htmlFor="lng">Longitude</label>
-            <input
-              type="number"
-              name="lng"
-              id="lng"
-              required
-              inputMode="decimal"
-              pattern="[0-9]*[.,]?[0-9]*"
-              value={lng}
-              onChange={(e) => setLng(e.target.value)}
-            ></input>
-            <br />
-            <label htmlFor="system_size">System Size (MW)</label>
-            <input
-              type="number"
-              name="system_size"
-              id="system_size"
-              inputMode="decimal"
-              pattern="[0-9]*[.,]?[0-9]*"
-              value={size}
-              onChange={(e) => setSize(e.target.value)}
-            ></input>
-            <br />
-            <label htmlFor="utility">Utility</label>
-            <input
-              type="text"
-              name="utility"
-              id="utility"
-              value={utility}
-              onChange={(e) => setUtility(e.target.value)}
-            ></input>
-            <br />
-            <label htmlFor="proj_status">Status</label>
-            <select
-              name="proj_status"
-              id="proj_status"
-              value={status}
-              onChange={(e) => {
-                console.log("status changed");
-                setStatus(e.target.value);
-                console.log("e.target.value: ", e.target.value);
-              }}
-            >
-              <option value="Planning">Planning</option>
-              <option value="Development">Development</option>
-              <option value="Construction">Construction</option>
-              <option value="Operational">Operational</option>
-              <option value="Decommissioning">Decommissioning</option>
-            </select>
-            <br />
-            <label htmlFor="proj_lead">Project Lead</label>
-            <input
-              type="text"
-              name="proj_lead"
-              id="proj_lead"
-              value={lead}
-              onChange={(e) => setLead(e.target.value)}
-            ></input>
-            <br />
-
-            <button onClick={toggleUpdateModal}>Cancel</button>
-            <button type="submit">Update</button>
-          </form>
+          <h2>Edit Project</h2>
+          <ModalForm
+            onSubmitFunction={handleSubmit}
+            className={styles.projForm}
+            lat={lat}
+            setLat={setLat}
+            lng={lng}
+            setLng={setLng}
+            lead={lead}
+            setLead={setLead}
+            name={name}
+            setName={setName}
+            status={status}
+            setStatus={setStatus}
+            size={size}
+            setSize={setSize}
+            utility={utility}
+            setUtility={setUtility}
+            toggleModal={toggleShowUpdateModal}
+            showUpdateModal={showUpdateModal}
+          ></ModalForm>
           <br />
         </div>
       </div>

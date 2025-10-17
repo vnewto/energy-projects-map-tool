@@ -6,7 +6,7 @@ export default function ProjectsList({
   projects,
   handleClickProject,
   selectedProject,
-  toggleUpdateModal,
+  toggleShowUpdateModal,
 }) {
 //variables for setting up pagination of projects list
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,8 +32,8 @@ export default function ProjectsList({
 
   return (
     <div>
-      {projects === 0 ? (
-        <p>No projects selected</p>
+      {projects.length === 0 ? (
+        <p>No projects found</p>
       ) : (
         <div className={styles.projContainer}>
           <ul className={styles.projectList}>
@@ -43,7 +43,7 @@ export default function ProjectsList({
                   project={project}
                   handleClickProject={handleClickProject}
                   selectedProject={selectedProject}
-                  toggleUpdateModal={toggleUpdateModal}
+                  toggleUpdateModal={toggleShowUpdateModal}
                 ></Project>
               </li>
             ))}
@@ -52,7 +52,7 @@ export default function ProjectsList({
             <button 
               type="button"
               onClick={handlePreviousPage}
-              disabled={currentPage === 1}
+              disabled={(currentPage === 1) || (currentPage === 0)}
               className={styles.paginationBtn}
             >
               Prev
