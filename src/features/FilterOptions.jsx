@@ -60,6 +60,8 @@ export default function FilterOptions({
             onChange={(event) => {
               console.log("status of selectedField changed");
               setFilterField(event.target.value);
+              setFilterOperator("");
+              setFilterValue("");
               console.log("event.target.value: ", event.target.value);
             }}
           >

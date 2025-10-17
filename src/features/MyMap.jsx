@@ -5,6 +5,7 @@ import MyInfoWindow from "./MyInfoWindow";
 export default function MyMap({
   projects,
   selectedProject,
+  setSelectedProject,
   handleClickProject,
 }) {
   const default_center = {
@@ -36,7 +37,7 @@ export default function MyMap({
             );
           })}
           {selectedProject && (
-            <MyInfoWindow project={selectedProject}></MyInfoWindow>
+            <MyInfoWindow project={selectedProject} setSelectedProject={setSelectedProject}></MyInfoWindow>
           )}
         </Map>
       </APIProvider>

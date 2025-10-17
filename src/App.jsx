@@ -47,7 +47,7 @@ function App() {
   const [error, setError] = useState("");
 
   //variables for showing the addproject and updateproject modals
-  const [projectModal, setProjectModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   //variable to set the title of different pages
@@ -123,15 +123,15 @@ function App() {
     [setSelectedProject]
   );
 
-  //function that changes the addNewProject Modal state to false if true, or true if false
-  const toggleModal = () => {
-    setProjectModal(!projectModal);
+  //function that changes the Add Project Modal or Update Project Modal state to false if true, or true if false
+  const toggleShowAddModal = () => {
+    setShowAddModal(!showAddModal);
   };
 
-  //function that changes the showUpdateModal state to false if true, or true if false
-  const toggleUpdateModal = () => {
+  const toggleShowUpdateModal = () => {
     setShowUpdateModal(!showUpdateModal);
   };
+
 
   //function for adding a new project to the list
   async function addNewProject(newProject) {
@@ -246,14 +246,14 @@ function App() {
           element={
             <MapPage
               loading={loading}
-              projectModal={projectModal}
-              toggleModal={toggleModal}
+              showAddModal={showAddModal}
+              toggleShowAddModal={toggleShowAddModal}
+              showUpdateModal={showUpdateModal}
+              toggleShowUpdateModal={toggleShowUpdateModal}
               addNewProject={addNewProject}
-              toggleUpdateModal={toggleUpdateModal}
               updateProject={updateProject}
               selectedProject={selectedProject}
               setSelectedProject={setSelectedProject}
-              showUpdateModal={showUpdateModal}
               filterField={filterField}
               setFilterField={setFilterField}
               filterOperator={filterOperator}

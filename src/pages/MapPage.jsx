@@ -6,11 +6,11 @@ import MyMap from "../features/MyMap";
 import ProjectsList from "../features/ProjectsList";
 
 export default function MapPage({
-  projectModal,
-  toggleModal,
-  addNewProject,
+  showAddModal,
+  toggleShowAddModal,
   showUpdateModal,
-  toggleUpdateModal,
+  toggleShowUpdateModal,
+  addNewProject,
   updateProject,
   selectedProject,
   projects,
@@ -30,18 +30,20 @@ export default function MapPage({
     return (
       <>
         {/* add new Project Modal */}
-        {projectModal && (
+        {showAddModal && (
           <AddProjectModal
-            toggleModal={toggleModal}
+            toggleShowAddModal={toggleShowAddModal}
             addNewProject={addNewProject}
+            showAddModal={showAddModal}
           />
         )}
         {/* Update Project Modal */}
         {showUpdateModal && (
           <UpdateProjectModal
-            toggleUpdateModal={toggleUpdateModal}
+            toggleShowUpdateModal={toggleShowUpdateModal}
             updateProject={updateProject}
             selectedProject={selectedProject}
+            showUpdateModal={showUpdateModal}
           />
         )}
 
@@ -59,7 +61,7 @@ export default function MapPage({
               projects={projects}
               handleClickProject={handleClickProject}
             ></FilterOptions>
-            <button className={styles.addProjBtn} onClick={toggleModal}>
+            <button className={styles.addProjBtn} onClick={toggleShowAddModal}>
               Add New Project
             </button>
           </div>
@@ -80,7 +82,7 @@ export default function MapPage({
               projects={projects}
               handleClickProject={handleClickProject}
               selectedProject={selectedProject}
-              toggleUpdateModal={toggleUpdateModal}
+              toggleShowUpdateModal={toggleShowUpdateModal}
             ></ProjectsList>
           </div>
         </div>
