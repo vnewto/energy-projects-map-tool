@@ -37,7 +37,11 @@ export default function MyMap({
             );
           })}
           {selectedProject && (
-            <MyInfoWindow project={selectedProject} setSelectedProject={setSelectedProject}></MyInfoWindow>
+            <MyInfoWindow
+              project={selectedProject}
+              setSelectedProject={setSelectedProject}
+              key={selectedProject.name}
+            ></MyInfoWindow>
           )}
         </Map>
       </APIProvider>

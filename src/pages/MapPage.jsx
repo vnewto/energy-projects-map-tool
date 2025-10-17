@@ -62,6 +62,7 @@ export default function MapPage({
               handleClickProject={handleClickProject}
             ></FilterOptions>
             <button className={styles.addProjBtn} onClick={toggleShowAddModal}>
+              <i className="fa-solid fa-plus"></i>
               Add New Project
             </button>
           </div>

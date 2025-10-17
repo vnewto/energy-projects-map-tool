@@ -1,6 +1,8 @@
 import { InfoWindow } from "@vis.gl/react-google-maps";
 
 export default function MyInfoWindow({ project, setSelectedProject }) {
+  console.log("project: ", project);
+
   return (
     <InfoWindow
       position={project.location}

@@ -132,7 +132,6 @@ function App() {
     setShowUpdateModal(!showUpdateModal);
   };
 
-
   //function for adding a new project to the list
   async function addNewProject(newProject) {
     const payload = {
@@ -229,6 +228,7 @@ function App() {
       setProjects(
         projects.toSpliced(updatedProjIndex, 1, parsedUpdatedProject)
       );
+      setSelectedProject(parsedUpdatedProject);
     } catch (error) {
       setError(error?.message);
     }
