@@ -1,0 +1,28 @@
+.infoWindow {
+    padding: 0 1em 1em;
+    font-size: large;
+}
+
+.infoWindowField {
+    font-weight: 500;
+    color: rgba(49, 95, 105);
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: right;
+}
+
+.closeBtn {
+  background-color: rgb(49, 95, 105);
+  color: white;
+  border: none;
+  padding: 0.3em 1em;
+  font-family: "Poppins", sans-serif;
+  border-radius: 4px;
+  margin-left: 0.5em;
+}
+
+.closeBtn:hover {
+  background-color: rgba(49, 95, 105, 0.8);
+}

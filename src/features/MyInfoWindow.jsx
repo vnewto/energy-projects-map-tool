@@ -1,28 +1,42 @@
 import { InfoWindow } from "@vis.gl/react-google-maps";
+import EditProjBtn from "../shared/EditProjBtn";
+import styles from "./MyInfoWindow.module.css";
 
-export default function MyInfoWindow({ project, setSelectedProject }) {
+export default function MyInfoWindow({
+  project,
+  setSelectedProject,
+  toggleShowUpdateModal,
+}) {
+  console.log("project: ", project);
+
   return (
     <InfoWindow
       position={project.location}
       onClose={() => setSelectedProject("")}
+      className={styles.infoWindow}
     >
-      <h1>{project.proj_name}</h1>
+      <h2>{project.proj_name}</h2>
       <p>
-        <span>System Size: </span>
-        {project.system_size} MW
+        System Size:{" "}
+        <span className={styles.infoWindowField}>{project.system_size} MW</span>
       </p>
       <p>
-        <span>Utility: </span>
-        {project.utility}
+        Utility:{" "}
+        <span className={styles.infoWindowField}>{project.utility}</span>
       </p>
       <p>
-        <span>Status: </span>
-        {project.proj_status}
+        Status:{" "}
+        <span className={styles.infoWindowField}>{project.proj_status}</span>
       </p>
       <p>
-        <span>Project Lead: </span>
-        {project.proj_lead}
+        Project Lead:{" "}
+        <span className={styles.infoWindowField}>{project.proj_lead}</span>
       </p>
+      <div className={styles.btnContainer}>
+          <EditProjBtn toggleShowUpdateModal={toggleShowUpdateModal} />
+      <button className={styles.closeBtn} type='button' onClick={() => setSelectedProject('')}>Close</button>
+      </div>
+      
     </InfoWindow>
   );
 }

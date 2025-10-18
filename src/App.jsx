@@ -6,6 +6,7 @@ import Footer from "./shared/Footer.jsx";
 import MapPage from "./pages/MapPage.jsx";
 import About from "./pages/About.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import Layout from "./shared/Layout.jsx";
 
 // url and token for fetch request from airtable
 const token = `Bearer ${import.meta.env.VITE_PAT}`;
@@ -132,7 +133,6 @@ function App() {
     setShowUpdateModal(!showUpdateModal);
   };
 
-
   //function for adding a new project to the list
   async function addNewProject(newProject) {
     const payload = {
@@ -229,6 +229,7 @@ function App() {
       setProjects(
         projects.toSpliced(updatedProjIndex, 1, parsedUpdatedProject)
       );
+      setSelectedProject(parsedUpdatedProject);
     } catch (error) {
       setError(error?.message);
     }
@@ -236,37 +237,37 @@ function App() {
 
   return (
     <div>
-      <Header title={title}></Header>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <Routes>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-        <Route
-          path="/"
-          element={
-            <MapPage
-              loading={loading}
-              showAddModal={showAddModal}
-              toggleShowAddModal={toggleShowAddModal}
-              showUpdateModal={showUpdateModal}
-              toggleShowUpdateModal={toggleShowUpdateModal}
-              addNewProject={addNewProject}
-              updateProject={updateProject}
-              selectedProject={selectedProject}
-              setSelectedProject={setSelectedProject}
-              filterField={filterField}
-              setFilterField={setFilterField}
-              filterOperator={filterOperator}
-              setFilterOperator={setFilterOperator}
-              filterValue={filterValue}
-              setFilterValue={setFilterValue}
-              projects={projects}
-              handleClickProject={handleClickProject}
-            />
-          }
-        ></Route>
-      </Routes>
-      <Footer></Footer>
+      <Layout title={title}>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <Routes>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+          <Route
+            path="/"
+            element={
+              <MapPage
+                loading={loading}
+                showAddModal={showAddModal}
+                toggleShowAddModal={toggleShowAddModal}
+                showUpdateModal={showUpdateModal}
+                toggleShowUpdateModal={toggleShowUpdateModal}
+                addNewProject={addNewProject}
+                updateProject={updateProject}
+                selectedProject={selectedProject}
+                setSelectedProject={setSelectedProject}
+                filterField={filterField}
+                setFilterField={setFilterField}
+                filterOperator={filterOperator}
+                setFilterOperator={setFilterOperator}
+                filterValue={filterValue}
+                setFilterValue={setFilterValue}
+                projects={projects}
+                handleClickProject={handleClickProject}
+              />
+            }
+          ></Route>
+        </Routes>
+      </Layout>
     </div>
   );
 }

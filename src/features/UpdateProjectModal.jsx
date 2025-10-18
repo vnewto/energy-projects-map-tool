@@ -8,6 +8,8 @@ export default function UpdateProjectModal({
   updateProject,
   selectedProject,
 }) {
+const btnText='Update'
+
   //fill in fields of modal with the preexisting project information
   //create state variable for each new project key/value pair
   const [lat, setLat] = useState(selectedProject.location.lat);
@@ -68,6 +70,7 @@ export default function UpdateProjectModal({
             setUtility={setUtility}
             toggleModal={toggleShowUpdateModal}
             showUpdateModal={showUpdateModal}
+            btnText={btnText}
           ></ModalForm>
           <br />
         </div>

@@ -7,6 +7,8 @@ export default function AddProjectModal({
   showAddModal,
   addNewProject,
 }) {
+  const btnText='Add'
+
   //create state variable for each new project key/value pair
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
@@ -68,6 +70,7 @@ export default function AddProjectModal({
               setUtility={setUtility}
               toggleModal={toggleShowAddModal}
               showAddModal={showAddModal}
+              btnText={btnText}
             ></ModalForm>
           </div>
         </div>

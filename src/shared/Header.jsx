@@ -3,7 +3,7 @@ import styles from "./Header.module.css";
 
 export default function Header({ title }) {
   return (
-    <>
+    <div className={styles.headerContainer}>
       <nav>
         <NavLink
           to={"/"}
@@ -21,6 +21,6 @@ export default function Header({ title }) {
         </NavLink>
       </nav>
       <h1 className={styles.pageHeader}>{title}</h1>
-    </>
+    </div>
   );
 }

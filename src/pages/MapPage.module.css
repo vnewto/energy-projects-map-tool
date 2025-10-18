@@ -10,31 +10,51 @@ p {
   font-family: "Poppins", sans-serif;
 }
 
+.mapPageContainer {
+  margin: 0 auto;
+  max-width: 1800px;
+}
+
 .container {
   display: grid;
   grid-template-areas:
     "mapBar header"
     "map projList";
   gap: 1em;
+  justify-items: stretch;
+  align-items: stretch;
+  justify-content: stretch;
+  align-content: stretch;
 }
 
 /* grid areas */
-.projsHeader {
-  grid-area: header;
-}
-
-.mapContainer {
-  grid-area: map;
-}
-
 .mapBar {
   grid-area: mapBar;
   display: flex;
   justify-content: space-between;
 }
 
+.mapContainer {
+  grid-area: map;
+}
+
+.projsHeader {
+  grid-area: header;
+  text-align: center;
+}
+
 .projList {
   grid-area: projList;
+}
+
+.mapBar,
+.mapContainer {
+  max-width: 1200px;
+}
+
+.projsHeader,
+.projList {
+    max-width: 600px;
 }
 
 .addProjBtn {
@@ -45,9 +65,14 @@ p {
   color: white;
   padding: 0.3em 1.5em;
   border-radius: 8px;
+  justify-items: center;
 }
 
 .addProjBtn:hover {
   background: #60d98f;
   transition-duration: 0.3s;
+}
+
+.faIcon {
+  vertical-align: middle;
 }

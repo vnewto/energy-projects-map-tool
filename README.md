@@ -24,6 +24,7 @@ Click on a project under 'My Projects' to edit it:
 - [Airtable](https://airtable.com/) database used for data management
 - Map built with [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/overview)
 - [ESLint](https://eslint.org/) used for code analysis
+- [Font Awesome](https://docs.fontawesome.com/web/use-with/react) used for icons
 
 An API key is required for using Airtable. It is free to set up an Airtable account.
 An API key is also required for using Google Maps. A Google Cloud account is required and is free to set up.

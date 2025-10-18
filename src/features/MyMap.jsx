@@ -7,6 +7,7 @@ export default function MyMap({
   selectedProject,
   setSelectedProject,
   handleClickProject,
+  toggleShowUpdateModal,
 }) {
   const default_center = {
     location: {
@@ -37,7 +38,12 @@ export default function MyMap({
             );
           })}
           {selectedProject && (
-            <MyInfoWindow project={selectedProject} setSelectedProject={setSelectedProject}></MyInfoWindow>
+            <MyInfoWindow
+              project={selectedProject}
+              setSelectedProject={setSelectedProject}
+              key={selectedProject.name}
+              toggleShowUpdateModal={toggleShowUpdateModal}
+            ></MyInfoWindow>
           )}
         </Map>
       </APIProvider>

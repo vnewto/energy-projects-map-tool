@@ -1,9 +1,12 @@
-.projContainer {
-  max-width: 500px;
+.projsContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.projsListContainer {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .projectList {
@@ -19,7 +22,7 @@
 }
 
 .paginationBtn,
-.projContainer, 
+.projContainer,
 input {
   font-family: "Poppins", sans-serif;
 }
@@ -32,10 +35,14 @@ input {
 }
 
 .paginationBtn:hover {
-  background-color: #60d98f;
+  background-color: rgb(167, 167, 167);
   transition-duration: 0.3s;
 }
 
 .paginationBtn:disabled:hover {
   background-color: rgb(224, 224, 224);
+}
+
+.faIcon {
+  vertical-align: middle;
 }

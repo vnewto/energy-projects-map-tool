@@ -5,6 +5,9 @@ import FilterOptions from "../features/FilterOptions";
 import MyMap from "../features/MyMap";
 import ProjectsList from "../features/ProjectsList";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faPlug } from "@fortawesome/free-solid-svg-icons";
+
 export default function MapPage({
   showAddModal,
   toggleShowAddModal,
@@ -28,7 +31,7 @@ export default function MapPage({
     return <h3>Loading...</h3>;
   } else
     return (
-      <>
+      <div className={styles.mapPageContainer}>
         {/* add new Project Modal */}
         {showAddModal && (
           <AddProjectModal
@@ -62,6 +65,7 @@ export default function MapPage({
               handleClickProject={handleClickProject}
             ></FilterOptions>
             <button className={styles.addProjBtn} onClick={toggleShowAddModal}>
+              <FontAwesomeIcon icon={faPlus} className={styles.faIcon} />
               Add New Project
             </button>
           </div>
@@ -72,10 +76,13 @@ export default function MapPage({
               selectedProject={selectedProject}
               setSelectedProject={setSelectedProject}
               handleClickProject={handleClickProject}
+              toggleShowUpdateModal={toggleShowUpdateModal}
             ></MyMap>
           </div>
-          {/* Projects List Header */}
-          <h2 className={styles.projsHeader}>My Projects</h2>
+          <h2 className={styles.projsHeader}>
+            <FontAwesomeIcon icon={faPlug} />
+            My Projects
+          </h2>
           {/* List of Projects with Pagination component */}
           <div className={styles.projList}>
             <ProjectsList
@@ -86,6 +93,6 @@ export default function MapPage({
             ></ProjectsList>
           </div>
         </div>
-      </>
+      </div>
     );
 }
