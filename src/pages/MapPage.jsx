@@ -31,7 +31,7 @@ export default function MapPage({
     return <h3>Loading...</h3>;
   } else
     return (
-      <>
+      <div className={styles.mapPageContainer}>
         {/* add new Project Modal */}
         {showAddModal && (
           <AddProjectModal
@@ -65,7 +65,7 @@ export default function MapPage({
               handleClickProject={handleClickProject}
             ></FilterOptions>
             <button className={styles.addProjBtn} onClick={toggleShowAddModal}>
-              <FontAwesomeIcon icon={faPlus} />
+              <FontAwesomeIcon icon={faPlus} className={styles.faIcon} />
               Add New Project
             </button>
           </div>
@@ -93,6 +93,6 @@ export default function MapPage({
             ></ProjectsList>
           </div>
         </div>
-      </>
+      </div>
     );
 }

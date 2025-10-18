@@ -34,11 +34,11 @@ export default function ProjectsList({
   }
 
   return (
-    <div>
+    <div className={styles.projsContainer}>
       {projects.length === 0 ? (
         <p>No projects found</p>
       ) : (
-        <div className={styles.projContainer}>
+        <div className={styles.projsListContainer}>
           <ul className={styles.projectList}>
             {projsOnCurrentPage.map((project) => (
               <li key={project.id}>
@@ -58,7 +58,7 @@ export default function ProjectsList({
               disabled={(currentPage === 1) || (currentPage === 0)}
               className={styles.paginationBtn}
             >
-              <FontAwesomeIcon icon={faBackward} /> Prev
+              <FontAwesomeIcon icon={faBackward} className={styles.faIcon}/> Prev
             </button>
             <span>
               Page {currentPage} of {totalPages}
@@ -69,7 +69,7 @@ export default function ProjectsList({
               disabled={currentPage === totalPages}
               className={styles.paginationBtn}
             >
-              Next <FontAwesomeIcon icon={faForward} />
+              Next <FontAwesomeIcon icon={faForward} className={styles.faIcon}/>
             </button>
           </div>
         </div>
