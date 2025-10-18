@@ -3,7 +3,9 @@ import styles from "./About.module.css";
 export default function About() {
   return (
     <div className={styles.aboutContainer}>
-      <p>
+      <img src='../src/assets/windmills.jpg' className={styles.image} alt='wind turbines'></img>
+      <div>
+        <p>
         This map dashboard is intended to be used by any individual or company
         that manages location-based projects. Some examples could include
         warehouses, retail sites, or medical practices. This particular
@@ -25,6 +27,8 @@ export default function About() {
         <a href="/" className={styles.linkToHome}>
           Back to Home
         </a>
+      </div>
+      
       </div>
     </div>
   );
