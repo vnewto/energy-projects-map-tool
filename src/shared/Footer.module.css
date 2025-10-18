@@ -1,5 +1,20 @@
 .footerContainer {
   font-family: "Poppins", sans-serif;
   text-align: center;
+  margin-top: 3em;
+}
+
+.footerContainer p {
   font-size: small;
+  margin-bottom: 0.5em;
+}
+
+.faIcon {
+  font-size: xx-large;
+  color: rgba(49, 95, 105);
+}
+
+.faIcon:hover {
+  color: rgba(49, 95, 105, 0.8);
+  transition-duration: 0.3s;
 }
