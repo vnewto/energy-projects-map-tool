@@ -54,7 +54,7 @@ p {
 
 .projsHeader,
 .projList {
-    max-width: 600px;
+  max-width: 600px;
 }
 
 .addProjBtn {
@@ -75,4 +75,23 @@ p {
 
 .faIcon {
   vertical-align: middle;
+}
+
+/* Media Queries - largest to smallest */
+@media only screen and (max-width: 1000px) {
+  .container {
+    grid-template-areas:
+      "mapBar"
+      "map"
+      "header"
+      "projList";
+  }
+
+  .projList {
+    margin: 0 auto;
+  }
+
+  .projsHeader {
+    margin: 2em auto 0 auto;
+  }
 }
