@@ -1,24 +1,37 @@
 .formContainer {
-    display: flex;
+  display: flex;
 }
 
-form {
-    display: flex;
+form,
+.selectOptionsContainer {
+  display: flex;
 }
 
-option, select {
-    font-family: "Poppins", sans-serif;
-    padding: 0.2em;
+option,
+select {
+  font-family: "Poppins", sans-serif;
+  padding: 0.2em;
 }
 
 .clearFiltersBtn {
-    font-family: "Poppins", sans-serif;
-    padding: 0.2em 1em;
-    border: none;
-    font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  padding: 0.2em 1em;
+  border: none;
+  font-weight: 500;
 }
 
 .clearFiltersBtn:hover {
-    background-color: #60d98f;
-    transition-duration: 0.3s;
+  background-color: #60d98f;
+  transition-duration: 0.3s;
+}
+
+@media only screen and (max-width: 750px) {
+  .selectOptionsContainer {
+    flex-direction: column;
+    margin: 0 0.5em;
+  }
+
+  .clearFiltersBtn {
+    border-radius: 8px;
+  }
 }
