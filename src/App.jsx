@@ -1,12 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { useLocation, Routes, Route } from "react-router";
-import Header from "./shared/Header.jsx";
-import Footer from "./shared/Footer.jsx";
 import MapPage from "./pages/MapPage.jsx";
 import About from "./pages/About.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Layout from "./shared/Layout.jsx";
+import styles from './App.module.css';
 
 // url and token for fetch request from airtable
 const token = `Bearer ${import.meta.env.VITE_PAT}`;
@@ -236,7 +235,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className={styles.main}>
       <Layout title={title}>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <Routes>

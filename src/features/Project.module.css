@@ -23,3 +23,17 @@ li {
 .isSelected {
   background-color: hsl(143, 61%, 61%);
 }
+
+/* Media Queries */
+
+@media only screen and (max-width: 1000px) {
+  .projContainer {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .projContainer {
+    width: 300px;
+  }
+}
