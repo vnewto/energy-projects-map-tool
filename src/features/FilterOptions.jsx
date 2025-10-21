@@ -51,7 +51,7 @@ export default function FilterOptions({
       {/* form with three select inputs, one for field, one for operator, and one for value */}
       <form>
         {/* Select Field Input */}
-        <label>Filter by: </label>
+        <label className={styles.formLabel}>Filter by: </label>
         <div className={styles.selectOptionsContainer}>
           <select
             name="field"
